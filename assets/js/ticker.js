@@ -1,15 +1,23 @@
-/* 财经周报 · 实时行情条
- * 三层数据：1) 页面内置快照（生成时写入，离线/失败兜底）
+/* 财经周报 · 实时行情跑马灯 + 小屏表格兜底
+ * 数据三层：1) 页面内置快照（生成时写入，离线/失败兜底）
  *          2) 东方财富 push2 接口（浏览器直连，CORS *）
  *          3) 腾讯 qt.gtimg.cn 接口（GBK 文本，CORS *）作为备源
- * 任一接口失败都静默回退，页面永不空白；每条标注 live / snap 状态。
+ * 轮询频率自适应：交易时段高频、非交易时段低频，连续失败自动退避，避免打爆公开接口。
+ * 说明：本文件同时负责给每个 <table> 包一层 .tscroll，使历史周报在手机端也能横向滚动。
  */
 (function () {
   "use strict";
-  var CONF = [];            /* 在 boot() 时从 window.FW_TICK 读取，避免脚本顺序问题 */
-  var INTERVAL_MS = 30000;
-  var emHosts = ["https://push2.eastmoney.com", "https://push2delay.eastmoney.com"];
-  var box, seq = 0, busy = false;
+
+  var CONF = [];                 /* boot() 时从 window.FW_TICK 读取 */
+  var MARKET_HOURS = [           /* 相对活跃的时段（本地时间，含午休缓冲），单位小时 */
+    [9, 5], [12, 0],             /* 09:05-12:00 A股 */
+    [13, 0], [15, 10],           /* 13:00-15:10 A股 */
+    [16, 0], [17, 0],            /* 港股尾市 */
+    [21, 15], [24, 0],           /* 美股夜盘（北京时间） */
+    [0, 0], [5, 0]               /* 美股跨零点 */
+  ];
+  var FAST_MS = 8000, SLOW_MS = 90000;
+  var box, track, meta, seq = 0, busy = false, fails = 0, timer = null, last = null;
 
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
 
@@ -23,8 +31,18 @@
     if (isNaN(n)) return { txt: "--", cls: "flat" };
     return { txt: (n > 0 ? "+" : "") + n.toFixed(2) + "%", cls: n > 0.005 ? "up" : n < -0.005 ? "down" : "flat" };
   }
+  function inMarketWindow() {
+    var d = new Date(), h = d.getHours() + d.getMinutes() / 60, wk = d.getDay();
+    if (wk === 0 || wk === 6) { return h >= 21.25 || h < 5; }   /* 周末只有美股时段 */
+    for (var i = 0; i < MARKET_HOURS.length; i += 2) {
+      var a = MARKET_HOURS[i][0] + MARKET_HOURS[i][1] / 60, b = MARKET_HOURS[i + 1][0] + MARKET_HOURS[i + 1][1] / 60;
+      if (h >= a && h <= b) return true;
+    }
+    return false;
+  }
 
   /* ---------- 东方财富 ---------- */
+  var emHosts = ["https://push2.eastmoney.com", "https://push2delay.eastmoney.com"];
   function fromEastmoney(secids) {
     var host = emHosts[(seq++) % emHosts.length];
     var url = host + "/api/qt/ulist.np/get?fltt=2&invt=2&secids=" + encodeURIComponent(secids.join(",")) +
@@ -35,7 +53,8 @@
     }).then(function (j) {
       var out = {};
       ((j && j.data && j.data.diff) || []).forEach(function (d) {
-        out[d.f12] = { price: Number(d.f2), pct: Number(d.f3), ts: d.f124 };
+        if (typeof d.f2 === "string") return;                 /* 停牌/无数据返回 '-' */
+        out[d.f12] = { price: Number(d.f2), pct: Number(d.f3) };
       });
       return out;
     });
@@ -58,18 +77,18 @@
         var f = m[2].split("~");
         if (f.length < 33) return;
         var p = parseFloat(f[3]), prev = parseFloat(f[4]);
-        if (isNaN(p) || isNaN(prev) || prev === 0) return;
+        if (isNaN(p) || !isFinite(p) || isNaN(prev) || prev === 0) return;
         var pc = f[32] !== undefined ? parseFloat(f[32]) : (p / prev - 1) * 100;
-        out[m[1].replace(/^(sh|sz|hk|us)/, "")] = { price: p, pct: isNaN(pc) ? (p / prev - 1) * 100 : pc, ts: f[30] };
+        out[m[1].replace(/^(sh|sz|hk|us)/, "")] = { price: p, pct: isNaN(pc) ? (p / prev - 1) * 100 : pc };
       });
       return out;
     });
   }
 
-  /* ---------- 渲染 ---------- */
-  function render() {
-    if (!box) return;
-    box.innerHTML = "";
+  /* ---------- 渲染：跑马灯需要两组相同内容才能无缝循环 ---------- */
+  function group(aria) {
+    var g = el("div", "grp");
+    if (aria) g.setAttribute("aria-hidden", "true");
     CONF.forEach(function (item) {
       var d = item._live || item.snapshot || {};
       var p = pct(d.pct);
@@ -77,27 +96,57 @@
       q.appendChild(el("span", "n", item.name));
       q.appendChild(el("span", "v", fmt(d.price, item.dec)));
       q.appendChild(el("span", "c " + p.cls, " " + p.txt));
-      var mode = el("span", "mode" + (item._live ? " live" : ""), item._live ? "实时" : "快照");
-      q.appendChild(mode);
-      box.appendChild(q);
+      q.appendChild(el("span", "mode" + (item._live ? " live" : ""), item._live ? "实时" : "快照"));
+      g.appendChild(q);
     });
+    return g;
+  }
+  function render() {
+    if (!track) return;
+    track.innerHTML = "";
+    track.appendChild(group(false));
+    track.appendChild(group(true));
+    /* 滚动时长随内容宽度自适应，保持速度大致恒定（约 46px/s）；
+       页面隐藏时 rAF 不触发，所以先同步测宽，测不到再交给 rAF 兜一次。 */
+    function setDur() {
+      var w = track.scrollWidth / 2;
+      if (!w) return false;
+      track.style.setProperty("--dur", Math.max(28, Math.round(w / 46)) + "s");
+      return true;
+    }
+    if (!setDur()) requestAnimationFrame(setDur);
+    if (meta) {
+      var live = CONF.filter(function (i) { return i._live; }).length;
+      meta.textContent = "共 " + CONF.length + " 条 · 实时 " + live + " 条 · " +
+        (last ? "更新于 " + last : "尚未取得实时数据") +
+        (fails ? " · 接口连续失败 " + fails + " 次，已降频重试" : "") +
+        " · 悬停/点击可暂停";
+    }
   }
 
   function apply(maps) {
+    var any = false;
     CONF.forEach(function (item) {
       var keyEm = item.em && String(item.em).split(".")[1];
-      var got = (maps.em && keyEm && maps.em[keyEm]) || (maps.tc && item.tc && maps.tc[item.tc.replace(/^(sh|sz|hk|us)/, "")]);
-      if (got && !isNaN(got.price)) {
-        item._live = { price: got.price, pct: got.pct };
-      } else {
-        item._live = null;
-      }
+      var keyTc = item.tc && item.tc.replace(/^(sh|sz|hk|us)/, "");
+      var got = (maps.em && keyEm && maps.em[keyEm]) || (maps.tc && keyTc && maps.tc[keyTc]);
+      if (got && !isNaN(got.price)) { item._live = { price: got.price, pct: got.pct }; any = true; }
+      else { item._live = null; }
     });
     render();
+    return any;
   }
 
-  function poll() {
-    if (busy || !CONF.length) return;
+  function schedule() {
+    if (timer) clearTimeout(timer);
+    var base = inMarketWindow() ? FAST_MS : SLOW_MS;
+    var wait = base * Math.pow(2, Math.min(fails, 3));   /* 失败退避，最多 8 倍 */
+    timer = setTimeout(tick, wait);
+  }
+
+  function tick() {
+    if (busy || !CONF.length) { schedule(); return; }
+    if (document.hidden && last) { schedule(); return; }   /* 后台标签不轮询，但首帧仍取一次 */
     busy = true;
     var emIds = CONF.map(function (i) { return i.em; }).filter(Boolean);
     var tcIds = CONF.map(function (i) { return i.tc; }).filter(Boolean);
@@ -107,20 +156,41 @@
     Promise.all(jobs).then(function (res) {
       var merged = {};
       res.forEach(function (r) { if (r.em) merged.em = r.em; if (r.tc) merged.tc = r.tc; });
-      apply(merged);
-    }).catch(function () { render(); })
-      .then(function () { busy = false; });
+      var ok = apply(merged);
+      fails = ok ? 0 : fails + 1;
+      if (ok) last = new Date().toLocaleTimeString("zh-CN", { hour12: false });
+      render();
+    }).catch(function () { fails++; render(); })
+      .then(function () { busy = false; schedule(); });
+  }
+
+  /* ---------- 小屏表格横向滚动兜底 ---------- */
+  function wrapTables() {
+    [].forEach.call(document.querySelectorAll(".wrap table"), function (t) {
+      if (t.parentNode.classList.contains("tscroll")) return;
+      var w = el("div", "tscroll");
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
   }
 
   function boot() {
-    box = document.getElementById("ticker-strip");
-    if (!box) return;
+    box = document.querySelector(".ticker");
+    track = document.getElementById("ticker-strip");
+    meta = document.getElementById("ticker-meta");
+    wrapTables();
+    if (!track) return;
     CONF = window.FW_TICK || [];
-    if (!CONF.length) { var bar = box.closest(".ticker"); if (bar) bar.style.display = "none"; return; }
+    if (!CONF.length) { if (box) box.style.display = "none"; return; }
+    track.classList.add("track");
     render();
-    poll();
-    setInterval(function () { if (!document.hidden) poll(); }, INTERVAL_MS);
-    document.addEventListener("visibilitychange", function () { if (!document.hidden) poll(); });
+    if (box) {
+      box.addEventListener("click", function () { box.classList.toggle("paused"); });
+      box.addEventListener("touchstart", function () { box.classList.add("paused"); }, { passive: true });
+    }
+    tick();
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) tick(); });
+    window.addEventListener("resize", function () { render(); });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

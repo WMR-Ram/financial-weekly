@@ -44,20 +44,41 @@ a:hover { text-decoration: underline; }
 .stamp { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--txt-3); }
 .stamp b { color: var(--txt-2); font-weight: 600; }
 
-/* 行情条 */
-.ticker { border-bottom: 1px solid var(--line); background: var(--bg-2); overflow: hidden; }
-.ticker .inner {
-  max-width: 1180px; margin: 0 auto; padding: 9px 24px;
-  display: flex; gap: 26px; overflow-x: auto; scrollbar-width: thin;
+/* 行情条：自动滚动跑马灯（悬停/触摸暂停），字号较初版放大 */
+.ticker {
+  position: relative; border-bottom: 1px solid var(--line); background: var(--bg-2);
+  overflow: hidden;
 }
-.q { flex: 0 0 auto; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
-.q .n { color: var(--txt-2); margin-right: 7px; }
-.q .v { font-weight: 700; }
+.ticker::before, .ticker::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 34px; z-index: 2; pointer-events: none;
+}
+.ticker::before { left: 0; background: linear-gradient(90deg, var(--bg-2), rgba(17,23,34,0)); }
+.ticker::after { right: 0; background: linear-gradient(270deg, var(--bg-2), rgba(17,23,34,0)); }
+.ticker .track {
+  display: flex; width: max-content;
+  animation: fw-marquee var(--dur, 70s) linear infinite;
+  will-change: transform;
+}
+.ticker:hover .track, .ticker.paused .track,
+.ticker:focus-within .track { animation-play-state: paused; }
+.ticker .grp { display: flex; gap: 30px; padding: 11px 30px 11px 20px; }
+@keyframes fw-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker .track { animation: none; }
+  .ticker { overflow-x: auto; }
+}
+.q { flex: 0 0 auto; font-family: var(--mono); font-size: 14px; white-space: nowrap; display: inline-flex; align-items: baseline; }
+.q .n { color: var(--txt-2); margin-right: 8px; font-size: 13px; }
+.q .v { font-weight: 700; letter-spacing: .2px; }
 .q .c.up { color: var(--up); }
 .q .c.down { color: var(--down); }
 .q .c.flat { color: var(--txt-2); }
-.q .mode { font-size: 9.5px; color: var(--txt-3); margin-left: 6px; border: 1px solid var(--line); padding: 0 4px; border-radius: 3px; }
+.q .mode { font-size: 10px; color: var(--txt-3); margin-left: 7px; border: 1px solid var(--line); padding: 0 5px; border-radius: 3px; }
 .q .mode.live { color: var(--down); border-color: #1d4b3a; }
+.tickmeta {
+  max-width: 1180px; margin: 0 auto; padding: 5px 24px 0;
+  font-family: var(--mono); font-size: 10.5px; color: var(--txt-3);
+}
 
 /* 布局 */
 .wrap { max-width: 1180px; margin: 0 auto; padding: 30px 24px 80px; }
@@ -140,8 +161,36 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
 .toc a { display: block; color: var(--txt-3); margin-bottom: 7px; }
 .toc a:hover, .toc a.on { color: var(--acc); text-decoration: none; }
 @media (max-width: 1500px) { .toc { display: none; } }
+/* 移动端与窄屏适配 */
+@media (max-width: 1200px) {
+  .wrap { padding: 24px 18px 64px; }
+}
 @media (max-width: 860px) {
   .g2, .g3, .g4 { grid-template-columns: 1fr; }
-  .wrap { padding: 20px 14px 60px; }
-  .masthead .inner, .ticker .inner { padding-left: 14px; padding-right: 14px; }
+  body { font-size: 14.5px; }
+  .wrap { padding: 18px 13px 54px; }
+  .masthead .inner, .ticker .inner, .tickmeta { padding-left: 13px; padding-right: 13px; }
+  .masthead .inner { gap: 8px; padding-top: 10px; padding-bottom: 10px; }
+  .brand { font-size: 15.5px; }
+  .issue, .stamp { font-size: 10.5px; }
+  .stamp { margin-left: 0; flex-basis: 100%; }
+  h2 { font-size: 17.5px; }
+  .lead { font-size: 12.5px; }
+  .q { font-size: 13.5px; }
+  .q .n { font-size: 12.5px; }
+  .ticker .grp { gap: 22px; padding: 9px 22px 9px 13px; }
+  .card { padding: 13px 14px; }
+  .metric { font-size: 21px; }
+  .chart { height: 260px; }
+  table { font-size: 12.5px; }
+  th, td { padding: 7px 8px; }
+  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .tscroll table { min-width: 620px; }
+  .wk .row { font-size: 11.5px; gap: 10px; }
+  footer.pager { flex-direction: column; }
+  footer.pager a { text-align: center; }
 }
+/* 表格小屏兜底：JS 会给每个 table 包一层 .tscroll（见 ticker.js） */
+.tscroll { scrollbar-width: thin; }
+.tscroll::-webkit-scrollbar { height: 6px; }
+.tscroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
