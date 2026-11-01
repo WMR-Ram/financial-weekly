@@ -1,0 +1,86 @@
+{
+  "week": "2026-W44",
+  "period": {"from": "2026-10-26", "to": "2026-11-01", "trading": ["2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30"]},
+  "generatedAt": "2026-11-02T09:00:00+08:00",
+  "snapshotAt": "2026-10-30T15:09:00+08:00",
+  "sources": {
+    "indices": "today_investment_financial_data MCP: get_index_range_gains / get_index_realtime_quotes / list_index_quote_barch",
+    "overseas": "T. Rowe Price 周度评述、TradingEconomics、华尔街见闻、腾讯/东方财富公开行情接口",
+    "policy": "federalreserve.gov、bea.gov、bls.gov、home.treasury.gov、stats.gov.cn、mof.gov.cn、ndrc.gov.cn、ecb.europa.eu、chinamoney.com.cn"
+  },
+  "weekly": [
+    {"code": "000001", "name": "上证指数", "close": 3599.02, "week": -2.48, "day": -1.44, "m1": -6.33, "ytd": -10.55, "em": "1.000001", "tc": "sh000001"},
+    {"code": "399001", "name": "深证成指", "close": 10833.78, "week": -7.20, "day": -2.73, "em": "0.399001", "tc": "sz399001"},
+    {"code": "000300", "name": "沪深300", "close": 3985.50, "week": -2.92, "day": -1.39, "m1": -8.54, "m3": -12.40, "y1": -15.38, "ytd": -15.52, "em": "1.000300", "tc": "sh000300"},
+    {"code": "000510", "name": "中证A500", "close": 4793.31, "week": -4.37, "day": -1.87, "m1": -10.74, "m3": -13.76, "y1": -15.22, "ytd": -16.83, "em": "1.000510", "tc": "sh000510", "holding": true},
+    {"code": "000688", "name": "科创50", "close": 1160.84, "week": -13.73, "day": -5.48, "m1": -24.13, "m3": -26.92, "y1": -20.56, "ytd": -17.28, "em": "1.000688", "tc": "sh000688", "holding": true},
+    {"code": "H30269", "name": "中证红利低波", "close": 11380.10, "week": 3.90, "day": 0.65, "m1": 3.72, "m3": 1.87, "y1": -0.36, "ytd": 1.29, "em": "2.H30269", "holding": true},
+    {"code": "000922", "name": "中证红利", "close": 5592.45, "week": 3.59, "day": 0.82, "em": "1.000922", "tc": "sh000922"},
+    {"code": "399006", "name": "创业板指", "close": 2413.63, "week": -10.08, "day": -4.13, "em": "0.399006", "tc": "sz399006"},
+    {"code": "HSI", "name": "恒生指数", "close": 23294.42, "week": 0.87, "day": 1.46, "em": "124.HSI", "tc": "hkHSI"},
+    {"code": "NDX", "name": "纳斯达克100", "close": 28384.85, "week": null, "day": -3.46, "unverified": ["week"], "tc": "usNDX", "note": "东财 100.NDX 实返回纳指综合，勿混用", "holding": true},
+    {"code": "IXIC", "name": "纳斯达克综合", "close": 25437.00, "week": -2.00, "day": -2.86, "tc": "usIXIC"},
+    {"code": "SPX", "name": "标普500", "close": 7580.07, "week": -0.57, "day": -1.82, "em": "100.SPX"},
+    {"code": "DJIA", "name": "道琼斯工业", "close": 51770.31, "week": -0.85, "day": -1.09, "em": "100.DJIA", "tc": "usDJI"},
+    {"code": "N225", "name": "日经225", "close": 63290, "week": 0.95, "day": -2.12},
+    {"code": "SX5E", "name": "STOXX600", "week": 1.73},
+    {"code": "KOSPI", "name": "韩国综合指数", "close": 5731, "week": null, "day": -3.48},
+    {"code": "NIFTY50", "name": "印度 Nifty50", "close": 23013, "week": 2.0},
+    {"code": "BRENT", "name": "布伦特原油", "close": 113.43, "day": 2.40, "m1": 10.9, "yoy": 75},
+    {"code": "GOLD", "name": "现货黄金", "close": 3875.19, "day": -3.61},
+    {"code": "COPPER", "name": "COMEX 铜", "close": 6.5095, "week": 0.18, "day": -1.90},
+    {"code": "USDCNY", "name": "美元兑人民币(在岸)", "close": 6.6523, "day": -0.07, "fixing": 6.7138},
+    {"code": "UST10Y", "name": "美债10Y", "close": 4.93, "prevWeek": 5.00, "ust2y": 4.60, "ust30y": 5.31}
+  ],
+  "path_normalized": {
+    "base": {"date": "2026-10-23", "value": 100},
+    "dates": ["10-26", "10-27", "10-28", "10-29", "10-30"],
+    "series": {
+      "上证": [100.19, 98.86, 99.76, 98.94, 97.52],
+      "中证A500": [99.54, 97.79, 98.95, 97.46, 95.63],
+      "科创50": [97.77, 93.07, 95.35, 91.27, 86.28],
+      "红利低波": [101.41, 102.00, 101.67, 103.23, 103.90]
+    }
+  },
+  "industries_verified_weekly": {
+    "银行": 4.97, "石油石化": 3.50, "食品饮料": 3.29, "煤炭": 2.97, "综合": -8.18, "电子": -13.82
+  },
+  "market_breadth": {
+    "date": "2026-10-30", "up": 892, "down": 4602, "limitUp": 49, "limitDown": 93,
+    "turnover_cny_trillion": 1.69, "margin_balance_cny_trillion": 2.453, "margin_weekly_delta_cny_bn": -490
+  },
+  "funds": {
+    "539002": {"name": "建信新兴市场混合(QDII)A", "nav_from": 2.077, "nav_to": 2.232, "week_pct": 7.46, "type": "主动QDII新兴市场", "benchmark": "MSCI新兴市场90%+中债综合5%+活期5%", "top_holdings": ["台积电 9.77%","英伟达 9.45%","Lumentum 4.44%","美光 4.21%","西部数据 4.11%","阿斯麦 3.57%","日月光 3.37%"], "subscribe_limit": "单日单账户约100元", "note": "净值T+1滞后，10-30 纳指跌幅未反映"},
+    "019018": {"name": "易方达信息产业混合C", "nav_from": 6.137, "nav_to": 5.52, "week_pct": -10.05, "type": "主动偏股TMT", "benchmark": "中证TMT产业主题85%+中债总全价15%", "top_holdings": ["新易盛 5.92%","中际旭创 5.66%","长芯博创 4.68%","工业富联 4.63%","三环集团 4.19%"], "q3_nav_pct": -31.76, "q3_benchmark_pct": -19.49, "subscribe": "10-20 恢复大额申购", "manager": "郑希"}
+  },
+  "pending_verification": [
+    "纳斯达克100 周涨跌幅与东财/腾讯两口径差异",
+    "WTI 结算价（104.12 vs 突破112）",
+    "通信行业周值、KOSPI 周值",
+    "申万一级 31 行业完整周度序列",
+    "CME FedWatch 官方 12 月加息概率",
+    "中国 10Y 国债收益率点位",
+    "10 月 CPI/PPI、进出口、金融数据官方发布日",
+    "建信新兴市场 Q3 季报地区分布与第8大重仓",
+    "易方达信息产业完整前十与子行业占比",
+    "韩国 10 月半导体出口同比 +259% 数值异常",
+    "高盛/桥水上周是否有新目标位"
+  ],
+  "ticker": [
+    {"name": "上证", "em": "1.000001", "tc": "sh000001", "dec": 2, "snapshot": {"price": 3599.02, "pct": -1.44}},
+    {"name": "深成", "em": "0.399001", "tc": "sz399001", "dec": 2, "snapshot": {"price": 10833.78, "pct": -2.73}},
+    {"name": "沪深300", "em": "1.000300", "tc": "sh000300", "dec": 2, "snapshot": {"price": 3985.50, "pct": -1.39}},
+    {"name": "中证A500", "em": "1.000510", "tc": "sh000510", "dec": 2, "snapshot": {"price": 4793.31, "pct": -1.87}},
+    {"name": "科创50", "em": "1.000688", "tc": "sh000688", "dec": 2, "snapshot": {"price": 1160.84, "pct": -5.48}},
+    {"name": "创业板", "em": "0.399006", "tc": "sz399006", "dec": 2, "snapshot": {"price": 2413.63, "pct": -4.13}},
+    {"name": "红利低波", "em": "2.H30269", "dec": 2, "snapshot": {"price": 11380.10, "pct": 0.65}},
+    {"name": "恒生", "em": "124.HSI", "tc": "hkHSI", "dec": 2, "snapshot": {"price": 23294.42, "pct": 1.46}},
+    {"name": "纳指100", "tc": "usNDX", "dec": 2, "snapshot": {"price": 28384.85, "pct": -3.46}},
+    {"name": "纳指综合", "tc": "usIXIC", "dec": 2, "snapshot": {"price": 25437.00, "pct": -2.86}},
+    {"name": "标普500", "em": "100.SPX", "tc": "usINX", "dec": 2, "snapshot": {"price": 7580.07, "pct": -1.82}},
+    {"name": "道指", "em": "100.DJIA", "tc": "usDJI", "dec": 2, "snapshot": {"price": 51770.31, "pct": -1.09}},
+    {"name": "布伦特", "dec": 2, "snapshot": {"price": 113.43, "pct": 2.40}},
+    {"name": "现货黄金", "dec": 2, "snapshot": {"price": 3875.19, "pct": -3.61}},
+    {"name": "USD/CNY", "dec": 4, "snapshot": {"price": 6.6523, "pct": -0.07}}
+  ]
+}

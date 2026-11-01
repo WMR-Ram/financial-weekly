@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>财经周报 · 归档</title>
+<link rel="stylesheet" href="assets/css/theme.css">
+<style>
+  .hero { padding: 34px 0 10px; }
+  .hero h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: .5px; }
+  .hero h1 span { color: var(--acc); }
+  .hero p { color: var(--txt-2); font-size: 14px; max-width: 760px; }
+  .wk { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .wk:hover { border-color: var(--acc); text-decoration: none; }
+  .wk .id { font-family: var(--mono); font-size: 12px; color: var(--acc); }
+  .wk .t { font-size: 16.5px; font-weight: 700; color: var(--txt); margin: 4px 0 8px; }
+  .wk .d { font-size: 12.5px; color: var(--txt-2); }
+  .wk .row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-family: var(--mono); font-size: 12px; }
+  .hold { font-family: var(--mono); font-size: 12.5px; color: var(--txt-2); }
+  .hold b { color: var(--txt); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <div class="brand">财经<span>周报</span></div>
+    <div class="issue">每周一 09:00 自动生成</div>
+    <div class="stamp">最近构建 <b>2026-11-02</b></div>
+  </div>
+</header>
+
+<div class="ticker"><div class="inner" id="ticker-strip"></div></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>上周发生了什么，<span>这周该盯什么</span></h1>
+    <p>覆盖国内外宏观经济、央行与财政部政策、美联储与美国财政部动作、股票与期货市场结构，并对本周做情景推演。持仓相关指数：中证A500、中证红利低波、科创50、纳斯达克100；主动基金：建信新兴市场(QDII)、易方达信息产业。</p>
+    <p class="hold">数据主源：今日投资金融数据接口 + 官方发布（PBOC / MOF / NBS / Fed / Treasury / BLS / ECB）+ 头部财经媒体交叉验证。未能核实的数字在页面内标 <b>⚠️</b> 并集中列于「待核清单」。</p>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span>周报归档</h2>
+    <div class="grid g3">
+      <a class="wk" href="weeks/2026-W44.html">
+        <div class="id">2026-W44 · 10.26 — 11.01</div>
+        <div class="t">成长杀估值，红利避险</div>
+        <div class="d">科创50 周跌 13.73%、红利低波涨 3.90%；驱动是全球 AI 资本开支被质疑 + 美联储转鹰，而非国内政策收紧。央行上周动的是机制（隔夜逆回购 1.25% 新锚，11-02 起）。</div>
+        <div class="row"><span class="down">A500 -4.37%</span><span class="down">科创50 -13.73%</span><span class="up">红利低波 +3.90%</span><span class="down">019018 -10.05%</span><span class="up">539002 +7.46%</span></div>
+      </a>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    本站由 Qoder 定时任务自动生成与发布，仅作信息整理与研究记录，<b>不构成投资建议</b>。行情条为浏览器直连公开接口的实时/延迟读数，离线或未开盘时显示生成时的收盘快照。页面含个人持仓信息，已声明不被搜索引擎收录，请勿对外传播链接。
+  </div>
+</div>
+
+<script src="assets/js/ticker.js"></script>
+<script>
+window.FW_TICK = [
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3599.02, pct:-1.44}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10833.78, pct:-2.73}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:3985.50, pct:-1.39}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4793.31, pct:-1.87}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1160.84, pct:-5.48}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11380.10, pct:0.65}},
+  {name:"恒生",     em:"124.HSI",  tc:"hkHSI",   dec:2, snapshot:{price:23294.42, pct:1.46}},
+  {name:"纳指100",  tc:"usNDX",                  dec:2, snapshot:{price:28384.85, pct:-3.46}},
+  {name:"纳指综合",  tc:"usIXIC",                 dec:2, snapshot:{price:25437.00, pct:-2.86}},
+  {name:"标普500",  em:"100.SPX",  tc:"usINX",   dec:2, snapshot:{price:7580.07, pct:-1.82}},
+  {name:"布伦特",                                dec:2, snapshot:{price:113.43, pct:2.40}},
+  {name:"现货黄金",                              dec:2, snapshot:{price:3875.19, pct:-3.61}},
+  {name:"USD/CNY",                               dec:4, snapshot:{price:6.6523, pct:-0.07}}
+];
+</script>
+</body>
+</html>

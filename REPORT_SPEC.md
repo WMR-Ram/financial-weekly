@@ -51,6 +51,19 @@ D 级（券商/外资投行观点）：仅当能定位到**具体机构 + 具体
 NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾讯 `qt.gtimg.cn/q=usNDX,hkHSI`（GBK）。
 **这两个接口只用于页面行情条前端轮询**；正文写作的数字以 B/A 级为准，两者不一致时在脚注注明取数口径。
 
+### 已验证的公开行情接口映射（2026-11-02 实测，浏览器 file:// 与 GitHub Pages 均可直连，CORS 放行）
+
+| 标的 | 东财 secid | 腾讯 code | 备注 |
+|---|---|---|---|
+| 上证 / 深成 / 沪深300 / A500 / 科创50 / 创业板 / 中证红利 | `1.000001` `0.399001` `1.000300` `1.000510` `1.000688` `0.399006` `1.000922` | `sh000001` 等 | 双源可用 |
+| 中证红利低波 H30269 | `2.H30269` **未验证通过** | 无 | 前端显示"快照"，数值取 MCP 日线 |
+| 恒生 / 纳指100 / 纳指综合 / 标普500 / 道指 | `124.HSI`(不稳) | `hkHSI` `usNDX` `usIXIC` `usINX` `usDJI` | **境外一律优先用腾讯** |
+| 原油 / 黄金 / 铜 / 美元人民币 | — | `hf_*` 系列未验证通过 | 显示"快照"，数值取 TradingEconomics 等 |
+
+**重要坑（已踩过）**：东方财富 `100.NDX` 返回的是**纳斯达克综合指数**（标签"纳斯达克"），不是纳斯达克100。
+两者相差约 3000 点，混用会造成严重错误结论。因此 `FW_TICK` 里**禁止**给"纳指100"配 `100.NDX`，
+只用腾讯 `usNDX`（纳指100）与 `usIXIC`（纳指综合）分别显式命名。
+
 ### 已知指数代码
 
 | 名称 | 代码 | 备注 |
@@ -130,17 +143,23 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 2. 调 MCP 取指数周涨跌、行业表现、资金面、宏观数据；境外指数与商品用公开接口/官方页核对。
 3. WebSearch/WebFetch 取政策原文与媒体叙事；至少 3 次不同关键词检索，覆盖国内政策、海外政策、市场结构。
 4. 写 `data/<周号>.json` 快照 → 写 `weeks/<周号>.html`（复制既有周报页结构，保持类名与脚本调用一致）→ 重建 `index.html`。
-5. 本地校验：确认 HTML 无未闭合标签、`FW_TICK` 与 `FW_DATA` 可被解析、图表容器 id 与脚本一致；
-   用 `node -e` 或 `python -c` 做 JSON 合法性检查（pip 被拦，优先 node）。
-6. 发布：`git -C E:/financial-weekly add -A && git commit && git push`（见第 6 节）；
-   推送后 `curl` 线上 URL 确认 200，并在任务摘要里给出链接与 3–5 条本周核心结论。
+5. 本地校验（**必做，不通过不许发布**）：`node E:/financial-weekly/assets/check.js E:/financial-weekly`
+   —— 检查 JS 语法、JSON 合法性、HTML 标签闭合、图表容器与脚本 id 一致、行情条快照齐全、noindex 存在。
+6. 发布：`git -C E:/financial-weekly add -A && git commit && git push origin main`；
+   推送后 `curl -o /dev/null -w "%{http_code}" https://wmr-ram.github.io/financial-weekly/` 确认 200，
+   并在任务摘要里给出链接与 3—5 条本周核心结论。
 
-## 6. 发布与回退
+## 6. 发布与回退（按此顺序尝试）
 
-- 主路径：`gh` CLI（已 `gh auth setup-git`）→ `git push origin main`。
-- 网络异常导致 `git push` 失败时：改用 GitHub MCP 的 `create_or_update_file` / `push_files`
-  逐文件提交到 `WMR-Ram/financial-weekly` 的 `main` 分支，提交后必须再 `curl` 线上验证。
-- 只有全部推送失败才允许只留本地文件，并在任务摘要里明确标出"本周报未发布"。
+1. `git push`（走 github.com）。**已知问题**：本机到 `github.com:443` 直连时常 TLS 超时/被重置，
+   而 `api.github.com` 稳定。若第一次失败，间隔 5—10 秒重试最多 3 次。
+2. 全部失败 → 用 GitHub MCP 的 `create_or_update_file` 逐文件提交到 `WMR-Ram/financial-weekly` 的 `main`
+   （需先 `get_file_contents` 取 sha 才能更新已有文件；新增文件可不取）。
+3. 仍失败 → 只留本地文件，在任务摘要中明确标出"本周报未发布，原因：网络"。
+4. Pages 已开启（`build_type=legacy`，源 `main` 根目录），无需每周重开；
+   若线上 404 而仓库有文件，等待 1—3 分钟构建，必要时 `gh api -X POST repos/WMR-Ram/financial-weekly/pages/builds`。
+5. gh CLI 路径：`/c/Program Files/GitHub CLI/gh.exe`（已 `gh auth login`，token 存于 Windows 凭据管理器，
+   scope 含 repo/workflow）。git 提交身份配置在本仓库 local config 中，勿改全局。
 
 ## 7. 设计约束
 

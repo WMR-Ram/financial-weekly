@@ -6,7 +6,7 @@
  */
 (function () {
   "use strict";
-  var CONF = window.FW_TICK || [];
+  var CONF = [];            /* 在 boot() 时从 window.FW_TICK 读取，避免脚本顺序问题 */
   var INTERVAL_MS = 30000;
   var emHosts = ["https://push2.eastmoney.com", "https://push2delay.eastmoney.com"];
   var box, seq = 0, busy = false;
@@ -115,6 +115,8 @@
   function boot() {
     box = document.getElementById("ticker-strip");
     if (!box) return;
+    CONF = window.FW_TICK || [];
+    if (!CONF.length) { var bar = box.closest(".ticker"); if (bar) bar.style.display = "none"; return; }
     render();
     poll();
     setInterval(function () { if (!document.hidden) poll(); }, INTERVAL_MS);
