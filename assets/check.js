@@ -8,9 +8,13 @@ const bad = (m) => { console.log("FAIL  " + m); fail++; };
 const ok = (m) => console.log("ok    " + m);
 
 /* 1. JS 语法 */
-for (const f of ["assets/js/ticker.js", "assets/js/chart.js"]) {
-  try { new Function(fs.readFileSync(path.join(root, f), "utf8")); ok("JS 语法 " + f); }
-  catch (e) { bad("JS 语法 " + f + " : " + e.message); }
+for (const f of ["assets/js/ticker.js", "assets/js/chart.js", "assets/fetch_cffex_rank.js"]) {
+  try {
+    let src = fs.readFileSync(path.join(root, f), "utf8");
+    if (src.startsWith("#!")) src = src.slice(src.indexOf("\n") + 1);   /* shebang 不是合法 JS 表达式 */
+    new Function(src);
+    ok("JS 语法 " + f);
+  } catch (e) { bad("JS 语法 " + f + " : " + e.message); }
 }
 
 /* 2. JSON */
