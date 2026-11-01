@@ -46,6 +46,25 @@ for (const h of htmls) {
       else ok(h + " 行情条 " + arr.length + " 项快照完整，图表 " + calls.length + " 张");
     } catch (e) { bad(h + " FW_TICK 解析失败: " + e.message); }
   } else if (/ticker\.js/.test(src)) bad(h + " 引入了 ticker.js 但未定义 FW_TICK");
+
+  /* 编号引用与来源表必须对得上（正文只用 [n]，来源在文末） */
+  const refs = new Set([...src.matchAll(/<sup>\[(\d+)\]<\/sup>/g)].map(m => +m[1]));
+  const body = src.slice(0, src.indexOf('<section id="src"') < 0 ? src.length : src.indexOf('<section id="src"'));
+  if (/<source|（来源：|来源：/.test(body)) bad(h + " 正文出现括号式来源，应改为文末编号引用");
+  let n = 0, listed = new Set(), anyList = false;
+  for (const m of src.matchAll(/<ol(?:(\s+start="(\d+)"))?>([\s\S]*?)<\/ol>/g)) {
+    anyList = true;
+    let i = m[2] ? +m[2] : 1;
+    for (const li of m[3].matchAll(/<li[\s>]/g)) { listed.add(i); i++; }
+    n = i - 1;
+  }
+  if (refs.size) {
+    const missing = [...refs].filter(x => !listed.has(x)).sort((a, b) => a - b);
+    if (missing.length) bad(h + " 引用了来源表中不存在的编号: [" + missing.join("],[") + "]");
+    else ok(h + " 编号引用 " + refs.size + " 处均可在文末来源表（1—" + n + "）中找到");
+    const unused = [...listed].filter(x => !refs.has(x));
+    if (unused.length > 12) console.log("note   " + h + " 有 " + unused.length + " 条来源未被正文编号引用（允许，但可检查是否漏引）");
+  } else if (anyList && /<section id="src"/.test(src)) bad(h + " 有来源表但正文没有任何 [n] 编号引用");
 }
 console.log(fail ? `\n${fail} 项需修复` : "\n全部检查通过");
 process.exit(fail ? 1 : 0);
