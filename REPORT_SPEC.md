@@ -281,14 +281,19 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
   **不要给堆叠单元格里的 `sup` 加 `white-space:nowrap`**，那正是让 §07 这类长句表格多出 4px 的元凶。
 - **改动了 `assets/` 下任何文件后，必须把页面里的资源查询串 `?v=YYYY-MM-DDx` 递增一位**（如 `2026-11-02d` → `2026-11-02e`），
   否则 GitHub Pages 与手机浏览器会继续吃旧缓存，用户看到的还是坏版本。所有 HTML 里的版本号要一致。
-- 图表在容器内放不下时会自动放大宽度并横向滚动，同时插入 `.chart-hint`（"← 图表可左右滑动 →"）；
-  不要为了"看起来不截断"而缩小标签或删提示。
+- **图表一律不许出现滚动条（2026-11-02 用户第二次反馈定稿，优先级高于下面所有旧描述）**：
+  旧版"宽度不够就放大 svg ＋ `.chart` 横向滚动 ＋ `.chart-hint` 提示"已作废——`overflow-x:auto` 会让浏览器把
+  `overflow-y` 也算成 auto，固定 300px 高的容器因此冒出一根竖向滚动条，最后一根柱子还被裁在视野外。
+  现在 `chart.js` 的做法是：svg 宽度永远等于容器宽度、容器 `overflow:hidden`、高度由图表自己算；
+  类目带宽不足（`fwBar` 小于 `minPer`、`fwGroup` 小于 72px）时**自动切换成横向条形图**（标签在左完整显示、
+  条形从中线向两侧、数值写在条端），图只会变高不会滚动；`fwLine` 按容器宽度抽稀 x 轴刻度（每刻度 ≥62px）。
+  **不要再往页面里加 `.chart-hint`，也不要为了塞进去而缩小字号或删标签**——放不下就让它横排。
 
 - 深色金融终端风（`--bg:#0a0e14`，涨红跌绿，A股习惯）。
 - 图表全部走 `assets/js/chart.js` 的 `fwBar/fwGroup/fwLine`（零外部依赖，离线可渲染）；不引 CDN 图表库。
   **移动端约束（2026-11-02 已修，勿改回）**：图例统一画在**顶部并自动换行**（旧版按名字长度横排会溢出画布）；
-  折线图不在右端贴长序列名；容器宽度不足时 svg 按 `minPer`（每柱最小像素，默认 bar 34 / group 76 / line 56）
-  放大到最小可读宽度并让 `.chart` 转为横向滚动；已注册 resize 重绘。标签多的图（如 14 个指数）请显式给 `minPer`。
+  折线图不在右端贴长序列名；**放不下时改横向条形而不是滚动**（见上一条），`minPer` 现在只是"是否改横排"的阈值
+  （bar 默认 46、group 72），不再是"放大到最小宽度"；已注册 resize 重绘，横屏/缩放后按新宽度重画。
 - 每张图的 `.chart` 容器 id 必须与脚本调用一致（`assets/check.js` 会校验）。
 - 行情条走 `assets/js/ticker.js`：页面内置快照 + 前端自适应轮询（**盘中约 8 秒、非盘中约 90 秒、连续失败指数退避至多 8 倍**，
   页面隐藏时暂停、可见时立即刷新），东财失败自动切腾讯，双源都失败显示快照并标"快照"。**不要改回固定 30 秒**，
@@ -306,7 +311,8 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
 1. `node assets/check.js E:/financial-weekly` 全绿。
 2. 浏览器实测（本地 `file://` 与线上页各一次）：
    - `document.documentElement.scrollWidth === clientWidth` —— **页面不得横向溢出**；
-   - 每张被截断的图都有 `.chart-hint`，未截断的不该有；
+   - **每张 `.chart` 都不得有滚动条**：逐个量 `el.scrollWidth - el.clientWidth === 0` 且 `el.scrollHeight - el.clientHeight === 0`；
+     页面上不该再出现任何 `.chart-hint`（横排图表不需要滑动提示）；
    - `table[data-stack="1"]` 的数量 = 列数 ≥3 的表数量；1—2 列表的 `min-width` 必须是 `0px`；
    - 行情条 `mode.live` 数量 >0（东财失败时腾讯要能独自供数）；
    - 控制台只允许出现已知的一次公开接口偶发 `ERR_EMPTY_RESPONSE`，且不影响显示。
