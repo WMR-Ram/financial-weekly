@@ -24,6 +24,7 @@ for (const f of fs.readdirSync(path.join(root, "data")).filter(x => x.endsWith("
 }
 
 /* 3. HTML */
+const versions = new Set();
 const htmls = ["index.html", ...fs.readdirSync(path.join(root, "weeks")).filter(x => x.endsWith(".html")).map(x => "weeks/" + x)];
 for (const h of htmls) {
   const src = fs.readFileSync(path.join(root, h), "utf8");
@@ -47,6 +48,15 @@ for (const h of htmls) {
     } catch (e) { bad(h + " FW_TICK 解析失败: " + e.message); }
   } else if (/ticker\.js/.test(src)) bad(h + " 引入了 ticker.js 但未定义 FW_TICK");
 
+  /* 资源必须带 ?v= 版本号，且全站一致（GitHub Pages 缓存会让修复看起来没生效） */
+  const assets = [...src.matchAll(/(?:href|src)="([^"]*assets\/[^"]+)"/g)].map(m => m[1]);
+  for (const a of assets) {
+    const v = /[?&]v=([^&"]+)/.exec(a);
+    if (!v) { bad(h + " 资源引用缺版本号（改过 assets 要递增 ?v=）：" + a); continue; }
+    versions.add(v[1]);
+  }
+  if (!assets.length && h !== "index.html") bad(h + " 没有引用任何 assets 资源");
+
   /* 编号引用与来源表必须对得上（正文只用 [n]，来源在文末） */
   const refs = new Set([...src.matchAll(/<sup>\[(\d+)\]<\/sup>/g)].map(m => +m[1]));
   const body = src.slice(0, src.indexOf('<section id="src"') < 0 ? src.length : src.indexOf('<section id="src"'));
@@ -66,5 +76,7 @@ for (const h of htmls) {
     if (unused.length > 12) console.log("note   " + h + " 有 " + unused.length + " 条来源未被正文编号引用（允许，但可检查是否漏引）");
   } else if (anyList && /<section id="src"/.test(src)) bad(h + " 有来源表但正文没有任何 [n] 编号引用");
 }
+if (versions.size > 1) bad("资源版本号不一致，缓存会出现新旧混用：" + [...versions].join(" / "));
+else if (versions.size === 1) ok("全站资源版本号统一为 " + [...versions][0]);
 console.log(fail ? `\n${fail} 项需修复` : "\n全部检查通过");
 process.exit(fail ? 1 : 0);

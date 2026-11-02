@@ -211,7 +211,11 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
     content: attr(data-label); color: var(--txt-2); font-size: 11.5px;
     text-align: left; flex: 0 0 auto; max-width: 46%;
   }
-  table[data-stack="1"] td:first-child { color: var(--txt); font-weight: 700; }
+  table[data-stack="1"] td:first-child::before { content: none; }
+  table[data-stack="1"] td:first-child {
+    display: block; color: var(--txt); font-weight: 700; text-align: left;
+    font-size: 13px; margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px solid var(--line);
+  }
   table[data-stack="1"] td.num { font-family: var(--mono); }
   /* 未堆叠的窄表（1—2 列）：自然换行，不强制宽度 */
   .tscroll table { min-width: 0; }
