@@ -17,7 +17,7 @@
     [0, 0], [5, 0]               /* 美股跨零点 */
   ];
   var FAST_MS = 8000, SLOW_MS = 90000;
-  var box, track, meta, seq = 0, busy = false, fails = 0, timer = null, last = null;
+  var box, track, meta, seq = 0, busy = false, fails = 0, timer = null, last = null, rz = null;
 
   function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
 
@@ -164,13 +164,34 @@
       .then(function () { busy = false; schedule(); });
   }
 
-  /* ---------- 小屏表格横向滚动兜底 ---------- */
-  function wrapTables() {
+  /* ---------- 表格移动端预处理：≥3 列标记为可堆叠，1—2 列保持原样 ----------
+     旧版只做了"包一层横滑 + min-width:620px"，结果连两列表也被撑破卡片布局。
+     现在改为：给每列的单元格写 data-label（堆叠视图里当字段名），列数≥3 的表标记 data-stack=1，
+     具体是否堆叠由 CSS 媒体查询决定（见 theme.css）。 */
+  function prepTables() {
     [].forEach.call(document.querySelectorAll(".wrap table"), function (t) {
-      if (t.parentNode.classList.contains("tscroll")) return;
-      var w = el("div", "tscroll");
-      t.parentNode.insertBefore(w, t);
-      w.appendChild(t);
+      if (!t.parentNode.classList.contains("tscroll")) {
+        var w = el("div", "tscroll");
+        t.parentNode.insertBefore(w, t);
+        w.appendChild(t);
+      }
+      var box = t.parentNode;
+      var head = t.querySelectorAll("thead th");
+      var cols = head.length || (t.rows[0] ? t.rows[0].cells.length : 0);
+      if (head.length) {
+        var labels = [].map.call(head, function (h) { return h.textContent.trim(); });
+        [].forEach.call(t.rows, function (r) {
+          if (r.parentNode.tagName === "THEAD") return;
+          [].forEach.call(r.cells, function (td, i) {
+            if (labels[i] && !td.getAttribute("data-label")) td.setAttribute("data-label", labels[i]);
+          });
+        });
+      }
+      t.setAttribute("data-cols", cols);
+      if (cols >= 3) t.setAttribute("data-stack", "1"); else t.removeAttribute("data-stack");
+      /* 仍然放不下且不会堆叠时，才开启横向滚动 */
+      var needs = t.getAttribute("data-stack") !== "1" && t.scrollWidth > box.clientWidth + 4;
+      box.setAttribute("data-scroll", needs ? "1" : "0");
     });
   }
 
@@ -178,7 +199,8 @@
     box = document.querySelector(".ticker");
     track = document.getElementById("ticker-strip");
     meta = document.getElementById("ticker-meta");
-    wrapTables();
+    prepTables();
+    window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(prepTables, 250); });
     if (!track) return;
     CONF = window.FW_TICK || [];
     if (!CONF.length) { if (box) box.style.display = "none"; return; }

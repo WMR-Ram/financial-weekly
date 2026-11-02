@@ -170,7 +170,8 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   .wrap { padding: 24px 18px 64px; }
 }
 @media (max-width: 860px) {
-  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .g2, .g3 { grid-template-columns: 1fr; }
+  .g4 { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 14.5px; }
   .wrap { padding: 18px 13px 54px; }
   .masthead .inner, .ticker .inner, .tickmeta { padding-left: 13px; padding-right: 13px; }
@@ -184,17 +185,46 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   .q .n { font-size: 12.5px; }
   .ticker .grp { gap: 22px; padding: 9px 22px 9px 13px; }
   .card { padding: 13px 14px; }
-  .metric { font-size: 21px; }
+  .metric { font-size: 19px; }
   .chart { height: 260px; }
-  table { font-size: 12.5px; }
+  table { font-size: 13px; }
   th, td { padding: 7px 8px; }
-  .tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-  .tscroll table { min-width: 620px; }
   .wk .row { font-size: 11.5px; gap: 10px; }
   footer.pager { flex-direction: column; }
   footer.pager a { text-align: center; }
+
+  /* 关键修正：旧版把所有表格在窄屏一律 min-width:620px，
+     两列表格也被撑开，导致卡片胀破网格列宽（§2.2 就是这么坏的）。
+     现在按列数分策略：≥3 列改成"一行一张卡"的堆叠视图，2 列表格自然换行。 */
+  table[data-stack="1"] { display: block; min-width: 0; }
+  table[data-stack="1"] thead { display: none; }
+  table[data-stack="1"], table[data-stack="1"] tbody { width: 100%; }
+  table[data-stack="1"] tr {
+    display: block; border: 1px solid var(--line); border-left: 3px solid var(--acc);
+    border-radius: 8px; padding: 9px 11px; margin-bottom: 8px; background: var(--card-2);
+  }
+  table[data-stack="1"] td {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    border: 0; padding: 2px 0; text-align: right; font-size: 12.8px;
+  }
+  table[data-stack="1"] td::before {
+    content: attr(data-label); color: var(--txt-2); font-size: 11.5px;
+    text-align: left; flex: 0 0 auto; max-width: 46%;
+  }
+  table[data-stack="1"] td:first-child { color: var(--txt); font-weight: 700; }
+  table[data-stack="1"] td.num { font-family: var(--mono); }
+  /* 未堆叠的窄表（1—2 列）：自然换行，不强制宽度 */
+  .tscroll table { min-width: 0; }
+  .tscroll { overflow-x: visible; }
 }
-/* 表格小屏兜底：JS 会给每个 table 包一层 .tscroll（见 ticker.js） */
+/* 横向滚动容器只在超宽表格且未堆叠时启用 */
 .tscroll { scrollbar-width: thin; }
-.tscroll::-webkit-scrollbar { height: 6px; }
-.tscroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+.tscroll[data-scroll="1"] { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+.tscroll[data-scroll="1"]::after {
+  content: "← 表格可左右滑动 →"; display: block; text-align: center;
+  font-family: var(--mono); font-size: 10.5px; color: var(--txt-3); padding: 3px 0 6px;
+}
+.chart-hint {
+  text-align: center; font-family: var(--mono); font-size: 10.5px; color: var(--txt-3);
+  padding: 2px 0 6px;
+}

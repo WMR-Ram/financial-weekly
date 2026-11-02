@@ -38,6 +38,16 @@
     el.style.webkitOverflowScrolling = "touch";
     var svg = s("svg", { viewBox: "0 0 " + w + " " + h, width: w, height: h, "font-family": "sans-serif" });
     el.appendChild(svg);
+    /* 需要横向滚动时给一个提示，免得用户以为图被截断了 */
+    var sib = el.parentNode.querySelector(".chart-hint");
+    if (w > cw + 2) {
+      if (!sib) {
+        sib = document.createElement("div");
+        sib.className = "chart-hint";
+        sib.textContent = "← 图表可左右滑动 →";
+        el.parentNode.insertBefore(sib, el.nextSibling);
+      }
+    } else if (sib) { sib.parentNode.removeChild(sib); }
     return {
       svg: svg, w: w, h: h, narrow: w < 560,
       pad: Object.assign({ t: 18, r: 16, b: 42, l: 46 }, cfg.pad || {}),
