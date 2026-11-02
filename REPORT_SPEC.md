@@ -82,6 +82,34 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 调用 MCP 大输出工具（尤其 `get_fund_basic_info`，会返回全市场基金并被截断落盘）时，
 用 Grep/Read 在落盘文件里定位目标代码，不要重复整表调用。
 
+## 2.5 MCP 不可用时的公开数据源（2026-11-02 实测；B 级主源停用期间的替代路线）
+
+**2026-11-02 下午起 MCP `today_investment_financial_data` 已关闭**（调用返回 `Not Found`）。
+每次运行先探一次：`is_trade_date` 或任一指数工具能通就按 §2 的 B 级走；**不通就整批改用下表**，
+并在 §15 来源里写清域名与抓取时间，绝不因为取不到就用模型记忆补数。
+
+| 需要的数 | 公开替代接口（实测可用） | 要点 |
+|---|---|---|
+| 指数日线（收盘、成交额、区间涨跌） | `push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.000001&klt=101&fqt=1&lmt=N&end=20500101&fields1=f1,f2,f3&fields2=f51,f53,f56,f57` | f51 日期、f53 收盘、f56 成交量、f57 成交额（元）。**返回里含当日未完成的一根**，复盘只取最后一根已完成日期 |
+| 板块日线（涨跌、成交额） | 同上，`secid=90.BK0917` | 概念与行业都能取，不依赖 push2 |
+| 板块/指数逐日资金流 | `push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid=90.BKxxxx` | 字段顺序 f52 主力、f53 小单、f54 中单、f55 大单、f56 超大单；恒等式 主力＝大单＋超大单（`assets/fetch_bk_week.js` 已按此修正并自带校验） |
+| 两融余额与变化 | `datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_RZRQ_LSHJ&columns=ALL&sortColumns=DIM_DATE&sortTypes=-1&pageSize=5&pageNum=1&source=WEB&client=WEB`（带 `Referer: https://data.eastmoney.com/`） | RZYE 融资余额、RZMRE/RZCHE 融资买入与偿还；**以 DIM_DATE 为披露日**，通常滞后 1—2 个交易日 |
+| 涨停/跌停家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`（`dpt=wz.ztzt`，需 UA） | **`date` 参数被忽略，只返回最近一个交易日的池**（实测 11-02 盘中：涨停池 tc=47、跌停池 tc=82，字段 `lbc`＝连板数、`hybk`＝行业）。周一 09:00 跑时它就是上周五；要上一周历史只能靠媒体复盘并标"口径＝快照"。炸板率无公开接口，写未取证 |
+| 资金面短端利率 | 中国货币网 `chinamoney.com.cn/ags/ms/cm-u-bk-shibor/ShiborHis?lang=cn&startDate=&endDate=` | SHIBOR O/N、1W、3M 可取；DR007 专属端点未跑通（`CurrSysVal` 返回 Path not found），改由央行公告或头部媒体旁证，核不到标 ⚠️ |
+| 基金净值与重仓 | `fund.eastmoney.com/pingzhongdata/019018.js`（带 `Referer: https://fund.eastmoney.com/`） | 含 `Data_netWorthTrend` 逐日净值与 `stockCodes` 持仓；539002、019018 均可用；**持仓变动的权威口径仍是基金公司定期报告** |
+| 美债收益率 | `home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv` | A 级官方；2026-10-30：10Y 4.94、2Y 4.56、30Y 5.31。注意是**美债**，不要与 §09 的中债 10Y 混用 |
+| 指数估值与分位 | `danjuanfunds.com/djapi/index_eva/dj`（需 UA＋Referer） | 覆盖沪深300、科创50、红利低波（`CSIH30269` PE 9.38／分位 0.8032），**不含 000510 与 000001**；其分位窗口与中证五年分位口径不同，引用必须写明"分位口径＝该数据商历史窗口" |
+| 境外指数 | 腾讯 `qt.gtimg.cn/q=usNDX,usIXIC,usINX,usDJI,hkHSI`（GBK，`iconv -f GBK -t UTF-8`） | 东财 `push2`/`push2delay` 的 ulist、clist 会整段空响应（IP 限流，今日多次复现），**正文取数别押它**；页面行情条仍走东财→腾讯双源轮询 |
+| 富时中国A50 期指 | 新浪 `hq.sinajs.cn/list=hf_CHA50CFD`（带 `Referer: https://finance.sina.com.cn`，GB18030） | 第 0 字段最新价、第 7 昨收、第 4/5 最高/最低、第 12 日期；**新浪不发 CORS 头，浏览器取不到，只能生成时用 curl**；行情条若要 A50 用东财 secid `104.CN00Y`（代码出自东财官方 suggest 接口），取不到显示快照 |
+
+域名可用性小结：`push2his` / `push2ex` / `datacenter-web` 稳定，`push2` 与 `push2delay` 易限流——取数优先走前三个域。
+
+**交易日历（`is_trade_date` 停用后的判定依据）**：cron 已限定周一至周五，法定节假日按下表判定。
+2026 年上交所休市（来源：上交所 2025-12-22《关于上海证券交易所 2026 年部分节假日休市安排的通知》）：
+元旦 1/1—1/3（1/5 开市）、春节 2/15—2/23（2/24 开市）、清明 4/4—4/6（4/7 开市）、劳动节 5/1—5/5（5/6 开市）、
+端午 6/19—6/21（6/22 开市）、中秋 9/25—9/27（9/28 开市）、国庆 10/1—10/7（10/8 开市）；调休上班的周六周日仍休市。
+**每年 12 月下旬**须核对新年通知并更新本表；表内没有但行情明显停更时按"疑似休市"处理并在摘要说明，不得硬写空数据报告。
+
 ## 3. 板块结构
 
 ### 3.0 板块顺序与引用规范（2026-11-02 定稿，优先级高于下面的逐节说明）
@@ -178,9 +206,13 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 常用板块代码：半导体概念 BK0917、国产芯片 BK0891、人工智能 BK0800、CPO概念 BK1128、光通信模块 BK1136、
 存储芯片 BK1137、算力概念 BK1134、液冷服务器 BK1138、东数西算 BK1064、白酒 BK0896（作对照）。
 **2026-11-02 实测的两条接口坑（勿再踩）**：
-① daykline 返回列的**顺序随请求的 fields2 子集变化**，超大单/大单/中单/小单四列的正负号无法自证（上期就是把它当分档周度加总用了）。
-因此**只用主力净额、逐日值与板块涨跌幅**，可用恒等式核验：中单＋小单 ＝ −主力净额 逐日成立；**分档明细一律改用 MCP `list_fund_flow` 的具名字段**。
-抓取脚本 `assets/fetch_bk_week.js <起> <止> BK…` 已内置该校验。
+① `daykline` 的返回列**严格按 `fields2` 给出的顺序**（用 `f51,f53,f55` 与 `f51,f54,f56` 两组不相交请求交叉验证过），
+所以 `fields2` 必须写成 `f51..f63` **升序、且不要多带 f64/f65**，否则列会整体错位——上期 identityCheck 长期 FAIL 就是这个原因。
+② 但**列名到分档的映射至今未证实**：f53—f56 里"哪两列是超大单/大单"，两种对称贴法都能满足恒等式，
+且周度加总出现"主力 -510 亿而某列 +408 亿"的反号，怀疑那两列是**流出额而非净额**。
+因此**周报只允许使用主力净额（f52）、逐日值与板块涨跌幅（f63）**；分档周度加总一律不采信。
+板块内 ETF 的分档明细改用 MCP `list_fund_flow` 的**具名字段**（字段名明确，可信）。
+抓取脚本 `assets/fetch_bk_week.js <起> <止> BK…` 已把分档列改名为 `colF53Yi…colF56Yi` 并内置"有一对列之和等于主力"的必要校验。
 ② `push2.eastmoney.com`（板块列表与境外 ulist）在本机常整体不可达；`push2his` 与腾讯 `qt.gtimg.cn` 可用。境外指数一律走腾讯。
 curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本统一用 Node `fetch` 并在 https/http 间自动重试（见 `assets/fetch_concept_flows.js`）。
 必须区分"**资金流代理**"与"**真实景气**"：CPO/光模块无公开周频景气数据，只可用 LightCounting（季/年）与龙头月营收；

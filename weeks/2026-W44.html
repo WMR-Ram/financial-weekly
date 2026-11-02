@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>财经周报 2026-W44 · 杠杆砍在成长，筹码换到红利</title>
-<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-02i">
+<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-02j">
 </head>
 <body>
 
@@ -230,7 +230,9 @@
     <div class="card accent"><h4>真实景气停在 9 月与 10 月 8 日</h4><p>可核的产业链事实：台积电 2026 <b>9 月合并营收 5118.57 亿新台币，月减 0.6%、同比 +54.6%</b>（10-08 公布）<sup>[38]</sup>；Q3 营收 1.49 万亿新台币、同比 +50.9%<sup>[39]</sup>。<b>10 月营收要等 11 月上旬</b>；存储现货价的本期可核值未取回，上期记录停在 9-30<sup><span class="tag-verify">⚠️</span></sup>。<b>所以只能说价格证据停在 9 月、而股价已经先跌了 13.73%，不能据此断言基本面转向。</b></p></div>
     <div class="card accent"><h4>CPO/光模块没有公开周频景气</h4><p>可核验的只有 LightCounting 份额排名（季/年频）与龙头月度营收；龙头"订单/纪要"类信息<b>不可核验，本表不收录</b>。因此本节用资金流与板块涨跌作周频代理，并明确标注其性质<sup>[16]</sup>。</p></div>
   </div>
-  <p class="chart-note"><b>接口缺陷留档</b>：东财 daykline 的超大单/大单/中单/小单分档列，其<b>顺序与正负号随请求的 fields2 子集变化</b>，本期无法自证符号约定，故<b>不采用其分档周度加总</b>；ETF 的分档明细改用 MCP list_fund_flow 的具名字段<sup>[13]</sup>。已核验的只有主力净额、逐日值与板块涨跌幅（恒等式：中单＋小单 ＝ −主力净额 逐日成立）。</p>
+  <p class="chart-note"><b>接口口径留档</b>：东财 daykline 的返回列<b>严格按请求里 fields2 的给出顺序</b>（用不相交的 `f51,f53,f55` 与 `f51,f54,f56` 两组请求交叉验证），列序可复现；
+    但 <b>f53—f56 到超大单/大单/中单/小单的映射未能证实</b>——两种对称贴法都满足恒等式，且周度加总出现"主力 -510 亿、某列 +408 亿"的反号，疑为流出额而非净额。
+    因此<b>本页只使用主力净额、逐日值与板块涨跌幅</b>，不采信分档周度加总；ETF 的分档明细取自 MCP list_fund_flow 的具名字段<sup>[13]</sup>。</p>
 </section>
 <!-- ============ 05 国内政策 ============ -->
 <section id="s05">
@@ -635,8 +637,8 @@
 
 </div>
 
-<script src="../assets/js/chart.js?v=2026-11-02i"></script>
-<script src="../assets/js/ticker.js?v=2026-11-02i"></script>
+<script src="../assets/js/chart.js?v=2026-11-02j"></script>
+<script src="../assets/js/ticker.js?v=2026-11-02j"></script>
 <script>
 window.FW_TICK = [
   {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3599.02, pct:-1.44}},
