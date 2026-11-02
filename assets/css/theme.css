@@ -216,6 +216,19 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   /* 未堆叠的窄表（1—2 列）：自然换行，不强制宽度 */
   .tscroll table { min-width: 0; }
   .tscroll { overflow-x: visible; }
+
+  /* 窄屏没有侧栏目录，改成一行可滑动的章节胶囊（之前手机端完全没有导航） */
+  .masthead { position: static; }
+  .toc {
+    display: flex; position: static; width: auto; z-index: auto;
+    border-left: 0; border-bottom: 1px solid var(--line); padding: 8px 0 10px;
+    margin-bottom: 10px; overflow-x: auto; gap: 10px; scrollbar-width: none;
+  }
+  .toc::-webkit-scrollbar { display: none; }
+  .toc a {
+    flex: 0 0 auto; display: inline-block; margin: 0; white-space: nowrap;
+    border: 1px solid var(--line); border-radius: 20px; padding: 3px 11px; font-size: 11.5px;
+  }
 }
 /* 横向滚动容器只在超宽表格且未堆叠时启用 */
 .tscroll { scrollbar-width: thin; }
