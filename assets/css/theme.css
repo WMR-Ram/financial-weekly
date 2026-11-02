@@ -170,8 +170,8 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
   .wrap { padding: 24px 18px 64px; }
 }
 @media (max-width: 860px) {
-  .g2, .g3 { grid-template-columns: 1fr; }
-  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .g2, .g3 { grid-template-columns: minmax(0, 1fr); }
+  .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   body { font-size: 14.5px; }
   .wrap { padding: 18px 13px 54px; }
   .masthead .inner, .ticker .inner, .tickmeta { padding-left: 13px; padding-right: 13px; }
@@ -218,6 +218,13 @@ footer.pager a:hover { border-color: var(--acc); color: var(--txt); text-decorat
     font-size: 13px; margin-bottom: 5px; padding-bottom: 5px; border-bottom: 1px solid var(--line);
   }
   table[data-stack="1"] td.num { font-family: var(--mono); }
+  /* 堆叠单元格的值是唯一弹性子项：不给 min-width:0 与换行约束时，
+     长句和 [n] 上标会把卡片撑宽、进而撑破文档宽度（窄屏横向溢出）。 */
+  table[data-stack="1"] td > * { min-width: 0; overflow-wrap: anywhere; }
+  table[data-stack="1"] td { overflow-wrap: anywhere; }
+  /* grid/flex 子项默认 min-width:auto，长内容会把轨道撑到超过容器；必须显式收到 0。 */
+  table[data-stack="1"] tr > * { min-width: 0; }
+  .card > *, .lead, .chart-note { overflow-wrap: anywhere; }
   /* 未堆叠的窄表（1—2 列）：自然换行，不强制宽度 */
   .tscroll table { min-width: 0; }
   .tscroll { overflow-x: visible; }
