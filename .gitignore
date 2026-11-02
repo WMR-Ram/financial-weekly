@@ -1,1 +1,7 @@
 .tmp/
+_qa*/
+qa*.js
+qa*.mjs
+em_*_err.txt
+*.err
+*_out.txt
