@@ -57,6 +57,17 @@ for (const h of htmls) {
   }
   if (!assets.length && h !== "index.html") bad(h + " 没有引用任何 assets 资源");
 
+  /* 页内相对链接必须指向真实文件：weeks/ 与 daily/ 都在子目录，回站点根要写 ../，
+     写成 href="index.html" 会解析成子目录下的 index.html，点了就是 Pages 404（2026-11-04 早报实测到的 bug）。 */
+  const links = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1])
+    .filter(u => !/^(https?:|#|mailto:|data:|\/\/)/i.test(u));
+  for (const u of links) {
+    const clean = u.split("?")[0].split("#")[0];
+    if (!clean) continue;
+    const target = path.resolve(path.join(root, path.dirname(h)), clean);
+    if (!fs.existsSync(target)) bad(`${h} 链接指向不存在的文件：href="${u}"（相对 ${path.dirname(h)}/ 解析不到；子目录页面回根目录要写 ../）`);
+  }
+
   /* 编号引用与来源表必须对得上（正文只用 [n]，来源在文末） */
   const refs = new Set([...src.matchAll(/<sup>\[(\d+)\]<\/sup>/g)].map(m => +m[1]));
   const body = src.slice(0, src.indexOf('<section id="src"') < 0 ? src.length : src.indexOf('<section id="src"'));
