@@ -183,8 +183,16 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 ① 北向资金每日/盘中净买入**自 2024-08-19 起官方已停止披露**（上交所 2024-07-26 通知），周报里不出现"北向净买入"是设计而非遗漏，替代口径为日频成交总额、前十大活跃股与季度持股；
 ② "主力/超大单/大单"是按单笔金额阈值**推算的分档**，不等于机构身份；散户/大户净买入交易所不披露；
 ③ 社保、国新/诚通、汇金等真实持仓只能靠季报十大流通股东（滞后 2 周至 1 个月），做成"最新披露季快照"而非周度数据。
-数据用：宽基 ETF 逐日主力资金流（`list_fund_flow`，用 510300/510050/510500/159338 等作**资金探针**，注明不是产品评价；
-159338 为中证A500ETF，2026-11-02 起新增，与 510300 同期可交叉验证"配置型买入是否只发生在沪深300/A500 权重端"）、
+数据用：**宽基 ETF 探针规则（2026-11-06 用户定稿）**——每个宽基/红利指数只用一只锚 ETF，取该指数下**规模最大**的场内 ETF；
+若复核到中央汇金/诚通/国新在某只 ETF 的持有人披露证据而它不是规模第一，则**两者并列报告、不替换**（探针要流动性，国家队证据是滞后披露）。
+**正文与表格必须写"ETF 全称（代码）跟踪××指数"并带规模与报告期**，不得只写代码、不得写成产品推荐。
+取数：`node E:/financial-weekly/assets/fetch_etf_anchor.js`（东财 `fundmobapi` 的 `ENDNAV` 期末净资产＋`TRACKINDEX` 跟踪指数全称，
+报告期口径为最近一期定期报告，**不是实时规模**；2026-11-06 实测 510300 沪深300 1068.79 亿、588000 科创50 941.29 亿、
+159352 中证A500 317.23 亿（大于 159338 的 243.10 亿）、512890 中证红利低波动 312.87 亿、515450 标普红利低波50 205.36 亿）。
+东财 F10 的持有人结构**只有机构/个人比例、没有前十大份额持有人名单**（实测无"汇金"字样），
+国家队是否持有某只 ETF 须每期用 WebSearch 复核定期报告或权威报道，查不到就写"未见持有人披露证据，按规模最大选择"，禁止沿用记忆名单。
+资金流仍用 `list_fund_flow`（MCP 可用时）或 `assets/fetch_bk_week.js` 的 daykline 主力净额列（MCP 停用时的等价替代），注明不是产品评价；
+锚 ETF 与 510300 同期交叉验证"配置型买入是否只发生在沪深300/A500 权重端"。
 两融（`list_stock_margin_trade_totals`）、市场涨跌分布（`get_market_change_ratio_status`）、
 行业换手率及一年分位（`list_idu_turnover_rates`）、指数估值与五年分位（`get_index_valuation`）。
 "国家队"只写可证的部分：宽基 ETF 超大单/大单是否**越跌越买**、四档是否同向净流入，并引用央企增持公告或权威报道作旁证，**禁止断言"国家队在买"**。
@@ -263,7 +271,11 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
 
 1. `git push`（走 github.com）。**已知问题**：本机到 `github.com:443` 直连时常 TLS 超时/被重置，
    而 `api.github.com` 稳定。若第一次失败，间隔 5—10 秒重试最多 3 次。
-2. 全部失败 → 用 GitHub MCP 的 `create_or_update_file` 逐文件提交到 `WMR-Ram/financial-weekly` 的 `main`
+2. 全部失败 → 用 **GitHub Data API**（`gh api` 走 api.github.com，实测在 github.com:443 被断时仍可用）逐文件提交到 `WMR-Ram/financial-weekly` 的 `main`：
+   `POST /git/blobs`（content 用 base64，先把 CRLF 归一成 LF）→ 以远端 head 的 tree 作 `base_tree` `POST /git/trees` →
+   `POST /git/commits`（parents 填远端当前 sha）→ `PATCH /git/refs/heads/main`（`force` 传布尔 `false`，用 `-F` 而非 `-f`）。
+   **GitHub MCP 已于 2026-11-06 下线，不要再依赖 `create_or_update_file`**；**禁止用关闭证书校验（`http.schannelCheckRevoke`、`sslVerify=false`）绕过 TLS 错误**。
+   用 API 提交后本地会与远端分叉（同内容不同 sha），恢复连通后用 `git pull --no-rebase` 合并即可，**不要 force push**。
    （需先 `get_file_contents` 取 sha 才能更新已有文件；新增文件可不取）。
 3. 仍失败 → 只留本地文件，在任务摘要中明确标出"本周报未发布，原因：网络"。
 4. Pages 已开启（`build_type=legacy`，源 `main` 根目录），无需每周重开；
