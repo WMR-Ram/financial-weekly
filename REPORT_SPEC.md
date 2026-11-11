@@ -295,9 +295,12 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
 1. `git push`（走 github.com）。**已知问题**：本机到 `github.com:443` 直连时常 TLS 超时/被重置，
    而 `api.github.com` 稳定。若第一次失败，间隔 5—10 秒重试最多 3 次。
 2. 全部失败 → 用 **GitHub Data API**（`gh api` 走 api.github.com，实测在 github.com:443 被断时仍可用）逐文件提交到 `WMR-Ram/financial-weekly` 的 `main`：
-   `POST /git/blobs`（content 用 base64，先把 CRLF 归一成 LF）→ 以远端 head 的 tree 作 `base_tree` `POST /git/trees` →
+   `POST /git/blobs`（content 用 base64，先把 CRLF 归一成 LF，**并且必须显式带 `"encoding":"base64"`**——
+   2026-11-11 早报仓漏了这个字段，GitHub 把 base64 串当正文入库，README 上线成乱码；提交后拿返回的 blob sha 与本地
+   `git hash-object` 比一遍再建 tree）→ 以远端 head 的 tree 作 `base_tree` `POST /git/trees` →
    `POST /git/commits`（parents 填远端当前 sha）→ `PATCH /git/refs/heads/main`（`force` 传布尔 `false`，用 `-F` 而非 `-f`）。
-   **GitHub MCP 已于 2026-11-06 下线，不要再依赖 `create_or_update_file`**；**禁止用关闭证书校验（`http.schannelCheckRevoke`、`sslVerify=false`）绕过 TLS 错误**。
+   **GitHub MCP 已于 2026-11-06 下线，不要再依赖 `create_or_update_file`**；走 Data API 时**不需要**旧工具的 `get_file_contents` sha，
+   `base_tree` 直接覆盖已有文件；**禁止用关闭证书校验（`http.schannelCheckRevoke`、`sslVerify=false`）绕过 TLS 错误**。
    用 API 提交后本地会与远端分叉（同内容不同 sha），恢复连通后用 `git pull --no-rebase` 合并即可，**不要 force push**。
    （需先 `get_file_contents` 取 sha 才能更新已有文件；新增文件可不取）。
 3. 仍失败 → 只留本地文件，在任务摘要中明确标出"本周报未发布，原因：网络"。
