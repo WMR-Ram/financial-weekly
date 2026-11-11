@@ -302,7 +302,6 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
    **GitHub MCP 已于 2026-11-06 下线，不要再依赖 `create_or_update_file`**；走 Data API 时**不需要**旧工具的 `get_file_contents` sha，
    `base_tree` 直接覆盖已有文件；**禁止用关闭证书校验（`http.schannelCheckRevoke`、`sslVerify=false`）绕过 TLS 错误**。
    用 API 提交后本地会与远端分叉（同内容不同 sha），恢复连通后用 `git pull --no-rebase` 合并即可，**不要 force push**。
-   （需先 `get_file_contents` 取 sha 才能更新已有文件；新增文件可不取）。
 3. 仍失败 → 只留本地文件，在任务摘要中明确标出"本周报未发布，原因：网络"。
 4. Pages 已开启（`build_type=legacy`，源 `main` 根目录），无需每周重开；
    若线上 404 而仓库有文件，等待 1—3 分钟构建，必要时 `gh api -X POST repos/WMR-Ram/financial-weekly/pages/builds`。
