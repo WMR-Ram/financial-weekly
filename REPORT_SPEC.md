@@ -96,7 +96,7 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 | 板块日线（涨跌、成交额） | 同上，`secid=90.BK0917` | 概念与行业都能取，不依赖 push2 |
 | 板块/指数逐日资金流 | `push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid=90.BKxxxx` | 字段顺序 f52 主力、f53 小单、f54 中单、f55 大单、f56 超大单；恒等式 主力＝大单＋超大单（`assets/fetch_bk_week.js` 已按此修正并自带校验） |
 | 两融余额与变化 | `datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_RZRQ_LSHJ&columns=ALL&sortColumns=DIM_DATE&sortTypes=-1&pageSize=5&pageNum=1&source=WEB&client=WEB`（带 `Referer: https://data.eastmoney.com/`） | RZYE 融资余额、RZMRE/RZCHE 融资买入与偿还；**以 DIM_DATE 为披露日**，通常滞后 1—2 个交易日 |
-| 涨停/跌停家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`（`dpt=wz.ztzt`，需 UA） | **`date` 参数被忽略，只返回最近一个交易日的池**（实测 11-02 盘中：涨停池 tc=47、跌停池 tc=82，字段 `lbc`＝连板数、`hybk`＝行业）。周一 09:00 跑时它就是上周五；要上一周历史只能靠媒体复盘并标"口径＝快照"。炸板率无公开接口，写未取证 |
+| 涨停/跌停/炸板家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool`（`dpt=wz.ztzt`，需 UA，**`date=YYYYMMDD` 逐日回取**） | 2026-11-16 实测更正：**`date` 参数是生效的**，可逐日取回该日池；周末与节假日返回 `tc:0` 空池，超出可取窗口也是空池（实测 11-06 可取、10-09 起为空，约近 8—10 个交易日）。`qdate` 恒等于最近交易日，**不能用来校验取到哪一天**——旧结论"date 被忽略"就是被它和"11-12 与 11-13 涨停恰好都是 37 家"误导的。字段 `lbc`＝连板数、`zbc`＝当日炸板次数、`hybk`＝行业（截断到 5 字）→ 上周逐日涨跌停家数、封板率、晋级率现在都能自己算，**不必再靠媒体复盘兜底**。只统计家数与行业分布，**不点名个股** |
 | 资金面短端利率 | 中国货币网 `chinamoney.com.cn/ags/ms/cm-u-bk-shibor/ShiborHis?lang=cn&startDate=&endDate=` | SHIBOR O/N、1W、3M 可取；DR007 专属端点未跑通（`CurrSysVal` 返回 Path not found），改由央行公告或头部媒体旁证，核不到标 ⚠️ |
 | 基金净值与重仓 | `fund.eastmoney.com/pingzhongdata/019018.js`（带 `Referer: https://fund.eastmoney.com/`） | 含 `Data_netWorthTrend` 逐日净值与 `stockCodes` 持仓；539002、019018 均可用；**持仓变动的权威口径仍是基金公司定期报告** |
 | 美债收益率 | `home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv` | A 级官方；2026-10-30：10Y 4.94、2Y 4.56、30Y 5.31。注意是**美债**，不要与 §09 的中债 10Y 混用 |
@@ -118,8 +118,9 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 | 美元指数 / 离岸人民币 | `100.UDI` / `133.USDCNH` | 在岸中间价用中国货币网 `ccpr.json`（只给当日） |
 | 东财板块行业代码 | 半导体 `BK1036`、传媒 `BK0486`、光伏设备 `BK1031`、教育 `BK0740`、软件开发 `BK0737`、元件 `BK0459`、通信设备 `BK0448`、煤炭 `BK0437`、石油石化 `BK0464`、贵金属 `BK0732`、能源金属 `BK1015`、电池 `BK1033`、银行 `BK1283` | `push2his` 日K 可直接算周涨跌与 `amtWk`（成交额，亿元）；**这是东财 BK 口径，与申万一级不等价，引用时必须写明口径** |
 
-**本期实测的三个失效点（不要再浪费时间重试）**：
-① `push2ex/getTopicZTPool`、`getTopicDTPool` **忽略 date 参数**，且**周一 09:20 返回 `rc:102、data:null`**（当日池尚未生成），上周逐日涨跌停家数只能靠媒体涨停复盘（东财《11 月 4 日涨停复盘》给家数与放量、金融界给行业分布）；
+**实测的三个坑（2026-11-16 更正其中第一条，别再按旧结论绕路）**：
+① `push2ex/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool` 的 **`date=YYYYMMDD` 生效**，逐日回取即可拿到上周每天的池（周末/节假日/超出窗口返回 `tc:0` 空池，窗口实测约近 8—10 个交易日）。
+   旧记录说"忽略 date、周一 09:20 返回 `rc:102、data:null`"——`rc:102` 只在**不传 date 且当日池尚未生成**时出现，传了上一个交易日就正常；当时误判的两个原因是 `qdate` 恒返回最近交易日、以及 11-12 与 11-13 涨停家数恰好都是 37。**上周逐日涨跌停、封板率、晋级率现在都是可核数据，不再标 ⚠️。**
 ② 中国货币网 `ShiborHis` 只返回 `baseCurveCfgList` 记录字段为空、`CcprHis` 404、`CcprHisNew` rep_code 500 → **DR007／SHIBOR／上周逐日中间价均不可得**，只能取当日中间价，其余标 ⚠️；
 ③ `home.treasury.gov` 日度收益率 CSV 在本机 fetch failed（https 与 http 均失败），改用上行 `171.*`。
 
@@ -284,6 +285,29 @@ curl 经 schannel 对 https 常报 `CURLE_RECV_ERROR/closed abruptly`，脚本�
    以及 `node assets/fetch_cffex_rank.js <上周五前一交易日> <上周五>`（期指会员多空持仓）。
 3. WebSearch/WebFetch 取政策原文与媒体叙事；至少 3 次不同关键词检索，覆盖国内政策、海外政策、市场结构。
 4. 写 `data/<周号>.json` 快照 → 写 `weeks/<周号>.html`（复制既有周报页结构，保持类名与脚本调用一致）→ 重建 `index.html`。
+   **成稿必须分段写入，禁止一次性 Write 整页**（2026-11-16 连续两次失败就是这么死的，见 §5.1）。
+
+### 5.1 成稿分段规则（2026-11-16 两次 `session-failed` 后定稿，硬性）
+
+两次失败的现场（`E--financial-weekly` 会话 `98ac3770`／`4c8c4931`）：数据快照 `data/2026-W46.json` 已写全（31KB，38 个字段），
+死在写 `weeks/2026-W46.html` 那一步，会话最后一条固定是模型侧合成错误 **`Model stream ended with unclosed content blocks`**，
+cron 因此记 `session-failed`。同一个会话里每次续跑（"继续"/"继续运行"）都在同一位置再死一次——**这是确定性失败，不是网络抖动**。
+对照数据：同一天早报两次运行（含 40KB 的单次 Write）0 次截断；11-09 那次周报把页面拆成 4 段（最大 25KB）也 0 次截断。
+所以病因是**单次输出体积撞上模型流式输出上限被截**，不是接口、不是磁盘（E: 剩 514G）、不是 GitHub。
+
+规则：
+
+1. **先写骨架再逐节填**：第一次 `Write` 只写 `<head>`＋CSS／JS 引用＋行情条＋目录＋空的 `<main>`＋来源表壳＋`</html>`，
+   控制在 **≤6KB**；之后每节用 `Edit` 往 `<main>` 里追加，**单次工具入参 ≤8KB（约 2500—3000 中文字）**。
+   整页 100KB 上下要分 12—16 次写完，不要试图三次搞定。
+2. **一次只写一节**：00—15 每节一次 `Edit`，来源表与待核清单各一次。写完一节就往下走，不要回头重写整页。
+3. 中途失败**不要重复同样的巨型写入**：先 `wc -c`／读文件确认已经写到哪一节，从下一节接着写。
+4. 每 3—4 节跑一次 `node assets/check.js` 前的粗略体检（`grep -c '<section'`）即可，别在成稿阶段做全量浏览器实测——
+   实测留给最后一步，避免上下文被大输出占满。
+5. 若同一位置连续两次被截，改成**更小的分段**（每节两次：先 `<h2>`＋前半，再后半），仍不许回到一次性整页写入。
+
+> 附带教训：09:00 那次在取数阶段烧掉约 20 分钟、写出三个临时脚本（`qa_w46_fetch*.js`，其中 `qa_w46_fetch3.js:30` 因 kline 字段下标取错抛
+> `TypeError: Cannot read properties of undefined`）才进入成稿——取数口径请先查 §2.5.1 的已验证 secid 与 `assets/fetch_*.js`，别在临时脚本里试错。
 5. 本地校验（**必做，不通过不许发布**）：`node E:/financial-weekly/assets/check.js E:/financial-weekly`
    —— 检查 JS 语法、JSON 合法性、HTML 标签闭合、图表容器与脚本 id 一致、行情条快照齐全、noindex 存在。
 6. 发布：`git -C E:/financial-weekly add -A && git commit && git push origin main`；
