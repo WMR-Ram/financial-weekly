@@ -27,7 +27,7 @@
   <div class="inner">
     <div class="brand">财经<span>周报</span></div>
     <div class="issue">每周一 09:00 自动生成</div>
-    <div class="stamp">最近构建 <b>2026-11-09 09:55</b></div>
+    <div class="stamp">最近构建 <b>2026-11-16 13:10</b></div>
   </div>
 </header>
 
@@ -38,12 +38,18 @@
   <div class="hero">
     <h1>上周发生了什么，<span>这周该盯什么</span></h1>
     <p>覆盖国内外宏观经济、央行与财政部政策、美联储与美国财政部动作、股票与期货市场结构，并对本周做情景推演。持仓相关指数：中证A500、中证红利低波、标普中国A股大盘红利低波50、科创50、纳斯达克100；主动基金：建信新兴市场(QDII)、易方达信息产业。</p>
-    <p class="hold">数据主源：今日投资金融数据接口（<b>2026-11-09 整批返回 40001，本期改用公开接口</b>）+ 官方发布（PBOC / MOF / NBS / SSE / CFFEX / Fed / Treasury / BLS / BOE）+ 头部财经媒体交叉验证。未能核实的数字在页面内标 <b>⚠️</b> 并集中列于「待核清单」；上一期遗留且本期核实到的问题在 §15 公开纠错。</p>
+    <p class="hold">数据主源：今日投资金融数据接口（<b>2026-11-16 复测仍整批返回 40001，继续改用公开接口</b>）+ 官方发布（PBOC / MOF / NBS / GAC / SSE / CFFEX / Fed / Treasury / BLS / USTR）+ 头部财经媒体交叉验证。未能核实的数字在页面内标 <b>⚠️</b> 并集中列于「待核清单」；上一期遗留且本期核实到的问题在 §15 公开纠错。</p>
   </div>
 
   <section>
     <h2><span class="no">01</span>周报归档</h2>
     <div class="grid g3">
+      <a class="wk" href="weeks/2026-W46.html">
+        <div class="id">2026-W46 · 11.09 — 11.15 · 新建</div>
+        <div class="t">科技周中见顶回落，红利逆势转正</div>
+        <div class="d">本期为新建页（前两个批次死在成稿写入，本次按规范 §5.1 分段写入完成）。<b>主线＝AI 算力硬件</b>：通信设备 +3.80%／主力 +36.71 亿、半导体 +2.24%／+88.74 亿、CPO +55.07 亿，涨幅＋资金＋涨停三证据同向；<b>切换日确认为 11-11 见顶、11-12 反手</b>（英伟达黄仁勋 11-12 辞任 CEO＋美债 10Y 破 5.10%），11-13 CPO 单日主力 -169.06 亿。<b>全球真实驱动是分母端</b>：美 10Y 周 +29bp 至 5.15%、12 月加息 25bp 定价 95.6%，金价 -4.6% 创 6 月以来最大周跌。宽基 ETF 份额终结八周净流入（周 -432.23 亿）但半导体主题逆市吸金；汇金/诚通/国新本期无任何新增披露，结论收窄到"配置型净赎回/净申购特征"。期指四品种净空全线收窄、贴水全线走阔——机构降 beta 而非加空。<b>本期公开纠错 6 处</b>：涨停池 date 参数实际生效（逐日涨跌停/封板率/晋级率改接口直取）、IC/IM 基差用中金所 2612 自算补齐、基金净值时间戳口径、ETF 双口径混写等。缺口：DR007/SHIBOR、周合计成交额自算、换手分位、000510 估值。</div>
+        <div class="row"><span class="down">A500 -1.46%</span><span class="up">科创50 +2.11%</span><span class="up">红利低波 +0.57%</span><span class="up">纳指100 +3.53%</span><span class="down">两市周成交 缩量11%</span></div>
+      </a>
       <a class="wk" href="weeks/2026-W45.html">
         <div class="id">2026-W45 · 11.02 — 11.08 · 新建</div>
         <div class="t">科技夺回主线，红利第一次补跌</div>
@@ -67,22 +73,22 @@
 <script src="assets/js/ticker.js?v=2026-11-06n"></script>
 <script>
 window.FW_TICK = [
-  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3649.18, pct:-1.10}},
-  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:11175.78, pct:-2.57}},
-  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:4054.28, pct:-1.44}},
-  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4914.08, pct:-1.76}},
-  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1253.20, pct:-2.60}},
-  {name:"中证500",  em:"1.000905", tc:"sh000905", dec:2, snapshot:{price:6597.35, pct:-2.13}},
-  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2465.23, pct:-3.96}},
-  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11299.76, pct:1.05}},
-  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.484, pct:1.50}},
-  {name:"恒生",     em:"100.HSI",    tc:"hkHSI",  dec:2, snapshot:{price:24481.86, pct:-1.27}},
-  {name:"纳指100",  em:"100.NDX100", tc:"usNDX",  dec:2, snapshot:{price:26989.99, pct:1.35}},
-  {name:"纳指综合", em:"100.NDX",    tc:"usIXIC", dec:2, snapshot:{price:24579.42, pct:1.09}},
-  {name:"标普500",  em:"100.SPX",    tc:"usINX",  dec:2, snapshot:{price:7376.86, pct:0.31}},
-  {name:"道指",     em:"100.DJIA",   tc:"usDJI",  dec:2, snapshot:{price:51285.73, pct:-0.46}},
-  {name:"布伦特",                                dec:2, snapshot:{price:97.97, pct:-1.36}},
-  {name:"USD/CNH",                               dec:4, snapshot:{price:6.6738, pct:0.13}}
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3634.35, pct:-0.59}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10968.79, pct:-2.05}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:4016.29, pct:-0.68}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4842.51, pct:-1.17}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1279.66, pct:-2.30}},
+  {name:"中证500",  em:"1.000905", tc:"sh000905", dec:2, snapshot:{price:6465.49, pct:-2.10}},
+  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2426.08, pct:-3.32}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11363.61, pct:1.24}},
+  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.461, pct:1.32}},
+  {name:"恒生",     em:"100.HSI",    tc:"hkHSI",  dec:2, snapshot:{price:23637.60, pct:-1.55}},
+  {name:"纳指100",  em:"100.NDX100", tc:"usNDX",  dec:2, snapshot:{price:27943.74, pct:-1.22}},
+  {name:"纳指综合", em:"100.NDX",    tc:"usIXIC", dec:2, snapshot:{price:25136.27, pct:-0.91}},
+  {name:"标普500",  em:"100.SPX",    tc:"usINX",  dec:2, snapshot:{price:7561.67, pct:-0.40}},
+  {name:"道指",     em:"100.DJIA",   tc:"usDJI",  dec:2, snapshot:{price:52347.55, pct:0.10}},
+  {name:"布伦特",                               dec:2, snapshot:{price:96.29, pct:-1.66}},
+  {name:"USD/CNH",                              dec:4, snapshot:{price:6.6747, pct:0.01}}
 ];
 </script>
 </body>

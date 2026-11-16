@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>财经周报 2026-W46 · 科技周中见顶回落，红利逆势转正</title>
+<link rel="stylesheet" href="../assets/css/theme.css?v=2026-11-06n">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <div class="brand">财经<span>周报</span></div>
+    <div class="issue">2026-W46 · 11.09—11.15</div>
+    <div class="stamp">生成 <b>2026-11-16 13:10</b> · 行情快照截至 <b>2026-11-13 收盘</b> · <a href="../index.html">归档</a></div>
+  </div>
+</header>
+
+<div class="ticker"><div class="track" id="ticker-strip"></div></div>
+<div class="tickmeta"><span id="ticker-meta"></span></div>
+
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#s00">核心结论</a>
+  <a href="#s01">市场速览</a>
+  <a href="#s02">资金与筹码</a>
+  <a href="#s03">期指多空</a>
+  <a href="#s04">科技链条</a>
+  <a href="#s05">国内政策</a>
+  <a href="#s06">海外政策</a>
+  <a href="#s07">政策雷达</a>
+  <a href="#s08">A股结构</a>
+  <a href="#s09">汇率与债</a>
+  <a href="#s10">持仓关联</a>
+  <a href="#s11">本周情景</a>
+  <a href="#s12">财经日历</a>
+  <a href="#s13">机构观点</a>
+  <a href="#s14">工具层</a>
+  <a href="#src">来源与待核</a>
+</nav>
+<!-- ============ 00 ============ -->
+<section id="s00">
+  <h2><span class="no">00</span>核心结论</h2>
+  <p class="lead">本期为<b>新建</b>：weeks/2026-W46.html 此前不存在（11-16 前两个批次分别死在成稿写入环节），本次按规范 §5.1 分段写入完成整页。数据快照 <code>data/2026-W46.json</code> 由当日 11:40 批次整批重取并逐项复核，本批次又复跑 ETF 锚、期指排行与涨跌停／炸板池逐日回取，补上封板率与晋级率两处缺口。B 级 MCP 全部工具仍返回 <code>40001 您无可用的资源包</code>，本期继续整批走规范 §2.5 公开接口，未用模型记忆补数。上期遗留问题本期核实到 6 处，已在 §15 公开纠错。</p>
+  <div class="grid g2">
+    <div class="card accent"><h4>1. 主线是 AI 算力硬件，但它在 11-11 见顶、11-12/13 整体退潮<span style="float:right;font-size:11px;color:var(--txt-3)">→ §04 §08</span></h4>
+      <p>主线判定四条证据本期成立三条：涨幅——通信设备 <b>+3.80%</b>、半导体 <b>+2.24%</b> 领涨东财 BK 行业口径<sup>[31]</sup>；资金——主力全周 <b>+36.71 亿／+88.74 亿</b>，CPO +55.07 亿、光通信模块 +46.07 亿<sup>[31]</sup>；涨停集中——11-11 全市场 85 家涨停里通信设备 7 家、元件 5 家、光学光电前一日的 6 家<sup>[30]</sup>。成交额占比因 push2his 午后断连缺第四条。<b>切换日明确：11-11 CPO 单日主力 +205.54 亿为全周极值，11-12 英伟达换帅＋美债 10Y 破 5.10% 后反手，11-13 单日 -169.06 亿</b><sup>[31]</sup>。对照：传媒 +2.44% 但主力 -28.26 亿，只有涨幅没有资金，是轮动不是主线。</p></div>
+    <div class="card risk"><h4>2. 本周全球的真实驱动是分母端：美债 10Y 一周 +29bp 到 5.15%<span style="float:right;font-size:11px;color:var(--txt-3)">→ §06 §09</span></h4>
+      <p>10 月 CPI 环比 +0.4%（预期 +0.3%）、PPI 同比 +6.5% 创近两年新高，CME FedWatch 对 12-09 加息 25bp 的定价升到 <b>95.6%</b>（周初 +18.2pct）<sup>[16]</sup><sup>[19]</sup><sup>[20]</sup>。同期 2Y +37bp、30Y 5.47%<sup>[21]</sup>，伦敦金 -4.6% 录 6 月初以来最大单周跌幅<sup>[43]</sup>。<b>股、金同跌、美元与利率同涨——这是紧缩定价，不是避险失灵，别把金价下跌读成风险偏好回升。</b></p></div>
+    <div class="card accent"><h4>3. 宽基 ETF 终结连续八周净流入，但"大资金夺路而逃"不成立<span style="float:right;font-size:11px;color:var(--txt-3)">→ §02</span></h4>
+      <p>份额口径全周宽基 ETF <b>-432.23 亿</b>、全市场 -525.8 亿，半导体主题 ETF 却逆市吸金（国泰半导体材料设备单周 +30.8 亿）<sup>[25]</sup>。同一只产品两套口径可以反号：科创50ETF华夏场内主力 <b>+19.15 亿</b> vs 份额 <b>-60.42 亿</b>；510300 主力 +0.26 亿 vs 份额 -42.04 亿<sup>[28]</sup><sup>[31]</sup>。汇金／诚通／国新本期<b>无任何新增公告或持有人披露</b><sup>[37]</sup>，结论收窄到"宽基端出现配置型净赎回特征、科技主题端出现配置型净申购特征"，不做国家队断言。</p></div>
+    <div class="card base"><h4>4. 红利线逆势转正、两融走平——防守与进攻同时有人站着<span style="float:right;font-size:11px;color:var(--txt-3)">→ §01 §10</span></h4>
+      <p>中证红利低波 H30269 周 <b>+0.57%</b>（11-13 单日 +1.24%），是持仓指数里唯一收红的两个之一（另一个是科创50 +2.11%）<sup>[1]</sup><sup>[2]</sup>；银行 +2.13%、主力 +25.04 亿<sup>[31]</sup>。两融余额全周仅 +31.72 亿、周五单边 -163.40 亿<sup>[29]</sup>——<b>杠杆资金是观望，不是出逃；这与 ETF 份额赎回同向，说明减仓来自现货型资金而非杠杆盘。</b></p></div>
+    <div class="card risk"><h4>5. 期指净空全线收窄、贴水却全线走阔；情绪拐点证据在宽度不在指数<span style="float:right;font-size:11px;color:var(--txt-3)">→ §03 §08</span></h4>
+      <p>中金所前 20 会员口径：IM 净空 <b>-31044→-25004 手</b>（空头减仓为主），但 IM 基差 -0.685%→<b>-1.266%</b>、IC -0.781%→-1.400%<sup>[32]</sup><sup>[33]</sup>——对冲撤出与期货定价承压同时发生。<b>涨跌停池逐日复核：涨停 54→93→85→37→37、跌停周五 33 家逼近涨停 37 家、封板率 11-12 掉到 51.39%、晋级率 11-12 仅 12.9%</b><sup>[30]</sup>。周五超 4700 只下跌<sup>[24]</sup>——上周的教训：判断转折要先看宽度与涨停质量，再看指数。</p></div>
+    <div class="card base"><h4>本周（11.16—11.22）只需盯这五个时点<span style="float:right;font-size:11px;color:var(--txt-3)">→ §07 §12</span></h4>
+      <p><b>11-16 央行 2000 亿元 6 个月买断式逆回购缩量续作</b>（当月净回笼 3000 亿，流动性"钉住短端而非放水"的口径直接验证日）<sup>[13]</sup>；<b>11-18/19 APEC 领导人非正式会议（深圳）</b>＋中美元首会晤预期<sup>[41]</sup>；11-20 LPR 报价；11 月下旬中央经济工作会议（市场预期）；12-09 FOMC（当前定价 95.6%）<sup>[16]</sup>。科技主线能否在换帅阴影下二次确认，看的是 APEC 前后的管制与关税表述。</p></div>
+  </div>
+</section>
+<!-- ============ 01 ============ -->
+<section id="s01">
+  <h2><span class="no">01</span>上周全球市场速览</h2>
+  <p class="lead">周涨跌与收盘均截至 <b>2026-11-13</b>（美股为 11-13 收盘，基准为前一周五 11-06 收盘）。涨红跌绿。上方行情条为浏览器实时轮询，与正文收盘口径可能不同。本期境内指数逐日序列由腾讯日K全量取得<sup>[2]</sup>，境外以东方财富日K对腾讯快照交叉复现<sup>[3]</sup>。</p>
+  <div class="card"><h4>指数周涨跌幅对比</h4><div id="c-week" class="chart"></div>
+    <p class="chart-note">全部为逐日收盘直接计算的区间涨跌<sup>[1]</sup><sup>[2]</sup><sup>[3]</sup>。<b>本周结构与上期完全反过来：涨的是境外（费城半导体 +8.05%、日经 +6.46%、KOSPI +4.56%），跌的是境内小盘与出海中国资产（中证1000 -2.28%、中国金龙 -5.49%、恒生科技 -6.50%）。</b>科创50 +2.11% 是境内唯一收红的主要宽基，且全靠 11-11/12 两天。</p></div>
+
+  <h3>资产全景（一）：A 股宽基与风格、港股</h3>
+  <table>
+    <thead><tr><th>指数 / 资产</th><th>11-13 收盘</th><th>周涨跌</th><th>周五单日</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>上证指数</td><td class="num">3634.35</td><td class="num down">-0.41%</td><td class="num down">-0.59%</td><td class="num">周收盘高点 3680.64（11-11）</td></tr>
+      <tr><td>深证成指</td><td class="num">10968.79</td><td class="num down">-1.85%</td><td class="num down">-2.05%</td><td class="num">周五跳水</td></tr>
+      <tr><td>沪深300</td><td class="num">4016.29</td><td class="num down">-0.94%</td><td class="num down">-0.68%</td><td class="num">—</td></tr>
+      <tr><td>中证A500 ★</td><td class="num">4842.51</td><td class="num down">-1.46%</td><td class="num down">-1.17%</td><td class="num">周内高点 4951.48（11-11）</td></tr>
+      <tr><td>科创50 ★</td><td class="num">1279.66</td><td class="num up">+2.11%</td><td class="num down">-2.30%</td><td class="num">周内高点 1309.84（11-12），11-12 盘中曾至 1364.88</td></tr>
+      <tr><td>创业板指</td><td class="num">2426.08</td><td class="num down">-1.59%</td><td class="num down">-3.32%</td><td class="num">11-11 单日 +3.11%</td></tr>
+      <tr><td>中证500</td><td class="num">6465.49</td><td class="num down">-2.00%</td><td class="num down">-2.10%</td><td class="num">—</td></tr>
+      <tr><td>中证1000</td><td class="num">6357.26</td><td class="num down">-2.28%</td><td class="num down">-2.76%</td><td class="num">小盘周跌幅最大</td></tr>
+      <tr><td>上证50</td><td class="num">2775.02</td><td class="num down">-0.44%</td><td class="num up">+0.11%</td><td class="num">周五唯一下跌股里收红的宽基</td></tr>
+      <tr><td>中证红利</td><td class="num">5510.92</td><td class="num down">-0.38%</td><td class="num up">+0.34%</td><td class="num">本期日频序列补齐<sup>[2]</sup></td></tr>
+      <tr><td>中证红利低波 ★</td><td class="num">11363.61</td><td class="num up">+0.57%</td><td class="num up">+1.24%</td><td class="num">ETF 512890 同向交叉验证（+0.65%）<sup>[2]</sup></td></tr>
+      <tr><td>标普中国A股大盘红利低波50 ★（代理）</td><td class="num">1.461</td><td class="num up">+0.14%</td><td class="num up">+1.32%</td><td class="num">ETF 515450 二级收盘代理，含费用与折溢价、非指数原值<sup>[2]</sup></td></tr>
+      <tr><td>恒生指数</td><td class="num">23637.60</td><td class="num down">-3.45%</td><td class="num down">-1.55%</td><td class="num">光通信与科网权重领跌<sup>[1]</sup><sup>[3]</sup></td></tr>
+      <tr><td>恒生科技</td><td class="num">3813.19</td><td class="num down">-6.50%</td><td class="num down">-3.02%</td><td class="num">上期 +8.61% 的反弹全部回吐</td></tr>
+    </tbody>
+  </table>
+
+  <h3>资产全景（二）：海外股指、商品、汇率与利率</h3>
+  <table>
+    <thead><tr><th>资产 / 指数</th><th>11-13 收盘</th><th>周涨跌</th><th>周五单日</th><th>备注</th></tr></thead>
+    <tbody>
+      <tr><td>纳斯达克100 ★</td><td class="num">27943.74</td><td class="num up">+3.53%</td><td class="num down">-1.22%</td><td class="num">11-13 与东财/腾讯双源一致<sup>[3]</sup></td></tr>
+      <tr><td>纳斯达克综合</td><td class="num">25136.27</td><td class="num up">+2.27%</td><td class="num down">-0.91%</td><td class="num">与纳指100 相差约 2800 点，禁混用<sup>[3]</sup></td></tr>
+      <tr><td>标普500</td><td class="num">7561.67</td><td class="num up">+2.51%</td><td class="num down">-0.40%</td><td class="num">—</td></tr>
+      <tr><td>道琼斯工业</td><td class="num">52347.55</td><td class="num up">+2.07%</td><td class="num up">+0.10%</td><td class="num">—</td></tr>
+      <tr><td>费城半导体</td><td class="num">10146.32</td><td class="num up">+8.05%</td><td class="num down">-3.43%</td><td class="num">11-13 单日 -3.43% 全在英伟达换帅后<sup>[3]</sup></td></tr>
+      <tr><td>纳斯达克中国金龙</td><td class="num">5522.55</td><td class="num down">-5.49%</td><td class="num">—</td><td class="num">与 A 股科技分向<sup>[3]</sup></td></tr>
+      <tr><td>日经225 / KOSPI</td><td class="num">61142.35 / 5290.53</td><td class="num up">+6.46% / +4.56%</td><td class="num">—</td><td class="num">亚太存储/代工链定价修复<sup>[3]</sup></td></tr>
+      <tr><td>富时100 / 斯托克50</td><td class="num">10902.56 / 6386.86</td><td class="num up">+2.14% / +3.51%</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>布伦特原油（IPE 当月连续）</td><td class="num">96.29 美元/桶</td><td class="num down">-1.66%</td><td class="num">—</td><td class="num">周一曾低见 91.96 附近<sup>[33]</sup></td></tr>
+      <tr><td>COMEX 黄金</td><td class="num">3887.60 美元/盎司</td><td class="num down">-4.71%</td><td class="num">—</td><td class="num">伦敦金盘中 3852.48 创逾一年新低，6 月初以来最大单周跌幅<sup>[43]</sup></td></tr>
+      <tr><td>COMEX 白银</td><td class="num">48.645 美元/盎司</td><td class="num down">-6.38%</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>COMEX 铜</td><td class="num">6.1525 美元/磅</td><td class="num down">-1.72%</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>美元指数</td><td class="num">103.41</td><td class="num up">+1.08%</td><td class="num">—</td><td class="num">利率上行同步走强<sup>[1]</sup><sup>[3]</sup></td></tr>
+      <tr><td>美元兑离岸人民币</td><td class="num">6.6747</td><td class="num up">+0.01%</td><td class="num">—</td><td class="num">人民币汇率全周几乎未动，是本周最稳的资产之一<sup>[3]</sup></td></tr>
+      <tr><td>美债 10Y</td><td class="num">5.15%</td><td class="num">+29bp</td><td class="num">—</td><td class="num">2Y 4.88%（+37bp）／30Y 5.47%（+21bp）<sup>[21]</sup></td></tr>
+      <tr><td>中债 10Y</td><td class="num">1.6181%</td><td class="num">+2.5bp</td><td class="num">—</td><td class="num">30Y +5.2bp；中美利差进一步走阔<sup>[22]</sup></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note">★ 为持仓对应指数。<b>口径提示三条</b>：① 纳斯达克100 用东方财富 <code>100.NDX100</code>，<code>100.NDX</code> 是纳指综合，两者相差约 2800 点<sup>[3]</sup>；② 标普中国A股大盘红利低波50 无公开日频指数行情（官网对抓取返回 403），表中数值为跟踪产品<b>南方标普中国A股大盘红利低波50ETF（515450，2026-09-30 报告期规模 205.36 亿元）的二级收盘价代理，含费用与折溢价、非指数原值</b><sup>[28]</sup><sup>[45]</sup>；③ 商品与境外期货为新浪日K自算口径、与东财合约快照交叉<sup>[33]</sup>。</p>
+
+  <h3>周内轨迹：11-11 见顶、11-12 反转、11-13 杀跌</h3>
+  <div class="card"><h4>以 11-06 收盘 = 100 归一化</h4><div id="c-path" class="chart"></div>
+    <p class="chart-note">轨迹由逐日收盘价直接归一，末端值与上表周涨跌一致<sup>[2]</sup>。<b>两条曲线的交叉是本周全部信息</b>：科创50 周四冲到 104.52 后两天回掉 2.4 个点；红利低波前三天阴跌、周五 100.57 收在全周新高——<b>进攻与防守在同一根 K 线上完成换手</b>。</p></div>
+
+  <h3>成交额：一周缩掉约 11%</h3>
+  <ul class="tight">
+    <li>上交所例行发布口径：11-09 至 11-13 沪市主板成交 <b>24686 亿元</b>、科创板 12786 亿元、基金 18272 亿元（其中 ETF 18202 亿元）<sup>[4]</sup>。</li>
+    <li>11-13 两市合计 <b>16556.68 亿元</b>（沪 7706.14／深 8850.54），较前日缩量约 2764 亿元<sup>[1]</sup><sup>[24]</sup>；全周合计 <b>≈8.26 万亿元、日均 ≈1.65 万亿元</b>，较前一周日均 1.86 万亿缩量约 11%<span class="tag-verify">⚠️</span>（周合计为媒体口径，push2his 午后断连未能自算逐日全量）。</li>
+  </ul>
+</section>
+<!-- ============ 02 资金与筹码 ============ -->
+<section id="s02">
+  <h2><span class="no">02</span>资金与筹码：宽基被赎回、科技被申购，主体是谁查不到</h2>
+
+  <div class="card risk"><h4>先读三条口径红线，否则本节数字会被误读</h4>
+    <ul class="tight">
+      <li><b>北向资金的每日/盘中净买入自 2024-08-19 起官方已停止披露</b>（上交所 2024-07-26 通知）<sup>[42]</sup>。能核的只有成交总额、前十大活跃证券与季度持股。<b>本节没有"北向净买入"这一行，是口径没了，不是漏写。</b></li>
+      <li><b>"主力/超大单/大单"是按单笔金额阈值推算的分档，不是账户身份</b>；且 <b>ETF 份额净申购（一级市场）与场内主力净额（二级市场）是两个市场的两套数</b>，本期同一只产品两者反号（见下表），任何单一口径都不能独立支撑"谁在买"的结论<sup>[28]</sup><sup>[31]</sup>。</li>
+      <li><b>汇金/诚通/国新的真实持仓只能来自定期报告的持有人披露，滞后约 2 周至 1 个季度</b>。本期（11-09—11-15）复核：未检索到任何新增增持公告或份额持有人披露，锚 ETF 一律按"规模最大"选择，不作国家队断言<sup>[37]</sup>。</li>
+    </ul>
+  </div>
+
+  <h3>锚 ETF：每个宽基/红利指数只取规模最大的一只（报告期口径，非实时规模）</h3>
+  <table>
+    <thead><tr><th>ETF 全称（代码）</th><th>跟踪指数</th><th>规模（亿元）</th><th>全周主力净额（亿元）</th><th>全周份额口径（亿元）</th></tr></thead>
+    <tbody>
+      <tr><td>沪深300ETF华泰柏瑞（510300）</td><td>沪深300指数</td><td class="num">1068.79</td><td class="num up">+0.26</td><td class="num down">-42.04</td></tr>
+      <tr><td>科创50ETF华夏（588000）</td><td>上证科创板50成份指数</td><td class="num">941.29</td><td class="num up">+19.15</td><td class="num down">-60.42</td></tr>
+      <tr><td>创业板ETF易方达（159915）</td><td>创业板指</td><td class="num">650.43</td><td class="num down">-15.14</td><td class="num">未取证</td></tr>
+      <tr><td>中证500ETF南方（510500）</td><td>中证500指数</td><td class="num">419.08</td><td class="num up">+1.60</td><td class="num down">-63.40</td></tr>
+      <tr><td>A500ETF南方（159352）</td><td>中证A500指数</td><td class="num">317.23</td><td class="num up">+1.10</td><td class="num down">-14.61</td></tr>
+      <tr><td>红利低波ETF华泰柏瑞（512890）</td><td>中证红利低波动指数</td><td class="num">312.87</td><td class="num down">-0.69</td><td class="num">未取证</td></tr>
+      <tr><td>中证1000ETF南方（512100）</td><td>中证1000指数</td><td class="num">206.28</td><td class="num up">+4.90</td><td class="num down">-64.96</td></tr>
+      <tr><td>红利低波50ETF南方（515450）</td><td>标普中国A股大盘红利低波50指数</td><td class="num">205.36</td><td class="num down">-1.08</td><td class="num">未取证</td></tr>
+      <tr><td>上证50ETF华夏（510050）</td><td>上证50指数</td><td class="num">203.80</td><td class="num down">-1.08</td><td class="num">未取证</td></tr>
+      <tr><td>红利ETF易方达（515180）</td><td>中证红利指数</td><td class="num">181.05</td><td class="num down">-0.66</td><td class="num">未取证</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note">规模＝最近一期定期报告（<b>2026-09-30</b>）期末净资产（东财 fundmobapi ENDNAV／TRACKINDEX 字段，本批次复跑复现）<sup>[28]</sup>；主力净额＝东财逐日分档自算（09:04 抓取，午后域名拒连，为本期唯一记录）<sup>[31]</sup>；份额口径＝中国基金报引 Wind/iFinD 折算，<b>主体属性属推断</b><sup>[25]</sup>。中证A500 线另一候选中证A500ETF国泰（159338，243.10 亿元）规模次之、全周主力 -1.39 亿，未入选锚。列在此处仅为口径交代，<b>不构成产品评价或推荐</b>。</p>
+  <h3>份额口径的周度结构：谁在流、谁在进</h3>
+  <ul class="tight">
+    <li>全周全部 ETF <b>-525.8 亿</b>、宽基 <b>-432.23 亿</b>（终结此前连续 8 周净流入）、债券型 -171.06 亿、行业主题 <b>+57.33 亿</b><sup>[25]</sup>。11-10 单日宽基 -41.12 亿，是连续 26 个交易日净流入的终点<sup>[26]</sup>。</li>
+    <li>逆市吸金的方向与 §04/§08 的资金流证据一致：<b>半导体材料设备主题</b>（国泰中证半导体材料设备 +30.8 亿、华夏上证科创板半导体材料设备 +26.1 亿、嘉实上证科创板芯片 +8.5 亿）<sup>[25]</sup>。场内分档与份额两套口径在这个方向上罕见地同向。</li>
+    <li>管理人层面：南方、华夏单周净流出超百亿，国泰 +60 亿、华宝 +40 亿<sup>[25]</sup>——<b>这是产品货架之间的搬家，与看多看空无关，不宜作方向解读。</b></li>
+  </ul>
+
+  <h3>国家队线索：事实与推测分栏（六条逐项复核）</h3>
+  <table>
+    <thead><tr><th>#</th><th>事实（可指到来源）</th><th>推测（明确标注，不进结论）</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>上交所例行发布（11-09 至 11-13）：沪市 ETF 份额 22399 亿份（周 +6 亿份，几乎不动）、市值 35838 亿元（周 -477 亿元，全部由指数下跌造成）<sup>[4]</sup>。</td><td>份额不增不减只能说明沪市端没有大规模申购，不能推断任何主体行为。</td></tr>
+      <tr><td>②</td><td>全市场宽基 ETF 份额单周 -432.23 亿元，为 11 月以来首次周度净流出<sup>[25]</sup>。</td><td>"大资金减仓"是媒体引 Wind 份额折算的推断口径，主体身份不可识别。</td></tr>
+      <tr><td>③</td><td>汇金可核的持有人证据停在 2026-01 至 07 的披露链：2025 年报持有 21 只 ETF 份额 3758.65 亿份；2026-01 多只巨无霸 ETF 总份额跌破汇金年末持仓，媒体判定其为年初赎回主要卖家（1-22 华泰柏瑞300ETF 总份额 685.35 亿份＜汇金两家主体年末合计 735.13 亿份）；至 6 月末持有该 ETF 约 189.15 亿份，仅为年末的 25.73%<sup>[37]</sup>。本期（11-09—11-15）未检索到汇金/诚通/国新任何新增公告或披露。</td><td><b>汇金行为是逆周期的：2025 增持、2026 上半年大幅退出。禁止把"下跌"线性外推为"汇金会再买"，本期也无证据说"汇金在卖"。</b></td></tr>
+      <tr><td>④</td><td>本期未见股票增持回购专项再贷款的周度新增披露。</td><td>无周度口径，不写入结论；进度数据挂待核。</td></tr>
+      <tr><td>⑤</td><td>北向仅季度持股口径可用，周度净买入官方停披<sup>[42]</sup>。</td><td>任何"北向流进流出"的周度表述都属编造，本节不出现。</td></tr>
+      <tr><td>⑥</td><td>社保/险资持仓依赖季报前十大流通股东，2026 三季报信息已在上期用完。</td><td>本期无增量，"长线机构加仓/减仓"无新证据。</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note"><b>本期结论只能写到这一层：宽基端出现配置型资金净赎回特征、科技主题端出现配置型净申购特征。</b>"国家队是否买入/卖出"列入文末待核清单。</p>
+
+  <h3>两融：走平的一周，周五单边减仓</h3>
+  <ul class="tight">
+    <li>两融余额逐披露日（元口径已换算为亿元，并用 RZJME5D 交叉验证）：11-06 <b>22833.53</b> → 11-09 22957.84 → 11-10 22945.61 → 11-11 23022.94 → 11-12 23028.65 → 11-13 <b>22865.25</b>；全周 +31.72 亿，周五单日 -163.40 亿<sup>[29]</sup>。</li>
+    <li>媒体旁证：杠杆资金此前连续多周下降、本周才企稳，两融交易占比仍在历史较低分位<sup>[25]</sup>。<b>结合 §01 的成交额缩量 11%，上周的下跌更像"存量资金换仓"，不是"杠杆被迫平仓"。</b></li>
+  </ul>
+</section>
+<!-- ============ 03 期指多空 ============ -->
+<section id="s03">
+  <h2><span class="no">03</span>股指期货多空持仓：净空全线收窄，贴水却全线走阔</h2>
+  <p class="lead">口径先说死：下表是<b>中金所前 20 名期货公司会员的席位排行加总，含"(代客)"经纪客户持仓，不识别机构身份</b>；数据取 11-06 与 11-13 两个周五的 2612 合约（2026-12-18 到期）盘后排名，基差为 2612 收盘对现货指数收盘自算<sup>[32]</sup><sup>[33]</sup>。</p>
+  <table>
+    <thead><tr><th>合约</th><th>多头前20（手）</th><th>空头前20（手）</th><th>净持仓（手）</th><th>净空周变化</th><th>基差 11-06→11-13</th></tr></thead>
+    <tbody>
+      <tr><td>IF2612（沪深300）</td><td class="num">131057→127203</td><td class="num">150870→146111</td><td class="num">-19813→-18908</td><td class="num up">收窄 905</td><td class="num down">-35.88→-59.69（-0.885%→-1.486%）</td></tr>
+      <tr><td>IH2612（上证50）</td><td class="num">48640→47428</td><td class="num">58481→56059</td><td class="num">-9841→-8631</td><td class="num up">收窄 1210</td><td class="num down">-30.41→-41.62（-1.091%→-1.500%）</td></tr>
+      <tr><td>IC2612（中证500）</td><td class="num">133221→127699</td><td class="num">147083→137889</td><td class="num">-13862→-10190</td><td class="num up">收窄 3672</td><td class="num down">-51.55→-90.49（-0.781%→-1.400%）</td></tr>
+      <tr><td>IM2612（中证1000）</td><td class="num">216450→216534</td><td class="num">247494→241538</td><td class="num">-31044→-25004</td><td class="num up">收窄 6040</td><td class="num down">-80.46（-0.685%→-1.266%）</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note">IM 基差 11-13 值 -80.46 点。<b>上期挂在待核的 IC/IM 周度基差本期已解决</b>：不再依赖东财连续合约代码，直接用中金所 2612 合约日收盘对现货自算，四品种一次取齐——这是一处公开纠错（详见 §15）。</p>
+  <h3>三件事怎么判</h3>
+  <ul class="tight">
+    <li><b>同向减仓还是单边加空？——双向都在减，减空为主。</b>IF 多减 3854／空减 4759，IM 多头几乎不动（+84）而空减 5956<sup>[32]</sup>。没有新增砸盘空单，"期指空头屠市"上周不成立。</li>
+    <li><b>IM/IC 净空恶化了吗？——没有，反而创阶段新低。</b>IM 净空 -31044→-25004、IC -13862→-10190<sup>[32]</sup>，小盘对冲压力在退。但注意退的是<b>对冲盘</b>，同期现货小盘（中证1000 -2.28%）跌得最多。</li>
+    <li><b>贴水全线走阔约一倍，这是本节最重要的一组矛盾。</b>IF -0.885%→-1.486%、IM -0.685%→-1.266%<sup>[33]</sup>。净空收窄＋贴水走阔同时出现，通常意味着<b>多头席位撤得比空头更快、期货端定价比现货更悲观</b>，与 §08 宽度恶化、§02 份额赎回互为佐证——机构在降低 beta 敞口，而不是加空攻击。</li>
+  </ul>
+  <p>会员结构线索：IM 多头前三含国泰君安(代客)、中信期货(代客)，空头前三同系中信(代客)、国泰君安(代客)<sup>[32]</sup>——<b>"代客"字样再次确认这是经纪通道汇总，读它只能读方向与力度，读不出"谁"。</b></p>
+</section>
+<!-- ============ 04 科技链条 ============ -->
+<section id="s04">
+  <h2><span class="no">04</span>科技链条拆解：钱先进来、后撤走，两天完成一个轮回</h2>
+  <p class="lead">口径声明：本节行业/概念数据为<b>东方财富 BK 板块口径，与申万一级不等价</b><sup>[31]</sup><sup>[44]</sup>；"主力净额"是按单笔金额阈值推算的<b>资金流代理，不是真实景气</b>。抓取时点 11-16 09:04——push2his 午后整段拒连，这组数是本期唯一记录。</p>
+  <div class="card"><h4>概念板块全周主力净额（亿元）</h4><div id="c-tech" class="chart"></div>
+    <p class="chart-note">数据同下表<sup>[31]</sup>。注意"人工智能"概念 -178.41 亿与 CPO +55.07 亿并存：<b>钱在 AI 链条内部集中到算力硬件一个点上进出，不是在整条 AI 主题里切换。</b></p></div>
+  <table>
+    <thead><tr><th>板块（概念口径）</th><th>周涨跌</th><th>全周主力（亿元）</th><th>峰值日单日</th><th>周五单日</th></tr></thead>
+    <tbody>
+      <tr><td>CPO 概念</td><td class="num up">+3.44%</td><td class="num up">+55.07</td><td class="num up">11-11：+205.54</td><td class="num down">-169.06</td></tr>
+      <tr><td>光通信模块</td><td class="num up">+3.00%</td><td class="num up">+46.07</td><td class="num up">11-11：+190.90</td><td class="num down">-156.74</td></tr>
+      <tr><td>芯片概念</td><td class="num up">+1.30%</td><td class="num up">+57.53</td><td class="num up">11-11：+118.84</td><td class="num down">-117.57</td></tr>
+      <tr><td>半导体（行业 BK1036）</td><td class="num up">+2.24%</td><td class="num up">+88.74</td><td class="num up">11-11：+76.75</td><td class="num down">-75.28</td></tr>
+      <tr><td>存储芯片</td><td class="num up">+0.75%</td><td class="num down">-26.63</td><td class="num up">11-11：+65.74</td><td class="num down">-91.84</td></tr>
+      <tr><td>算力概念</td><td class="num up">+0.55%</td><td class="num down">-11.02</td><td class="num up">11-11：+107.25</td><td class="num down">-95.56</td></tr>
+      <tr><td>液冷服务器</td><td class="num up">+0.82%</td><td class="num down">-14.23</td><td class="num">未逐日取证</td><td class="num">—</td></tr>
+      <tr><td>东数西算</td><td class="num down">-0.25%</td><td class="num down">-24.12</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>人工智能（概念）</td><td class="num down">-0.26%</td><td class="num down">-178.41</td><td class="num">—</td><td class="num">—</td></tr>
+      <tr><td>白酒（对照）</td><td class="num down">-0.51%</td><td class="num down">-6.82</td><td class="num">—</td><td class="num">—</td></tr>
+    </tbody>
+  </table>
+  <h3>资金流代理 ≠ 真实景气：本期能核到哪一步</h3>
+  <ul class="tight">
+    <li><b>海外真实景气是本周境外上涨的支点</b>：费城半导体 +8.05%、KOSPI +4.56%、日经 +6.46%，与台韩存储/代工链的涨价定价一致<sup>[3]</sup>；但<b>可核的周频景气数据仍停在 9 月</b>——DRAM/NAND 现货价与台积电月度营收本期未取到新增值，不得用 10 月旧值冒充本周（挂待核）<span class="tag-verify">⚠️</span>。</li>
+    <li><b>11-11→11-12 的反手有明确外部触发</b>：11-12 盘前英伟达董事会公告黄仁勋辞去总裁/CEO/董事，CFO Colette Kress 临时代行 CEO<sup>[23]</sup>；同日美债 10Y 升破 5.10%<sup>[21]</sup>。A 股 CPO 单日主力 -81.25 亿、11-13 再 -169.06 亿<sup>[31]</sup>。<b>AI 叙事的分子端从"需求"改写成"治理风险溢价"，这是上周与上上周行情最大的区别。</b></li>
+    <li><b>存储的分歧要单独点名</b>：BK 存储芯片周 +0.75% 但主力 -26.63 亿，份额端科创半导体材料设备 ETF 却在猛申购<sup>[25]</sup><sup>[31]</sup>——<b>现货涨价叙事与 A 股筹码定价不同向，这条链的"A 股映射"比"产业事实"走得快，是下周最大的证伪风险点。</b></li>
+    <li>中国金龙 -5.49%、恒生科技 -6.50%<sup>[3]</sup>：海外资金对中国科技资产的定价与 A 股算力硬件同步转弱，<b>"内强外弱"没有出现</b>。</li>
+  </ul>
+</section>
+<!-- ============ 05 国内政策 ============ -->
+<section id="s05">
+  <h2><span class="no">05</span>国内宏观与政策</h2>
+  <div class="card accent"><h4>一句话总结</h4>
+    <p><b>数据端是"工业品涨价、信用仍弱、出口强"；资金端央行用缩量买断式＋"隔夜+7天"搭配把短端利率钉住而非放水；中美同步延长暂停期给科技链买到两个月窗口——而真正的政策变量集中在本周（11-18/19 APEC、11-20 LPR、月下旬中央经济工作会议）释放。</b></p></div>
+  <h3>已公布数据（公布值 / 前值 / 来源与发布日）</h3>
+  <table>
+    <thead><tr><th>发布日</th><th>主体</th><th>数据</th></tr></thead>
+    <tbody>
+      <tr><td>11-09</td><td>国家统计局</td><td>10 月 CPI 同比 +0.7%（前值 +0.9%、环比持平、核心 +0.8%）；PPI 同比 +5.7%（2022 年 6 月以来最快）、环比 +0.7%，购进价格同比 +7.9%，1—10 月 PPI 平均 +2.7%<sup>[5]</sup><sup>[6]</sup></td></tr>
+      <tr><td>11-10</td><td>海关总署</td><td>10 月以美元计出口 4123.3 亿美元、同比 +35.2%（增速较上月回落 1.1pct，历史较高水平）；进口 3070.5 亿美元、同比 +41.6%；1—10 月出口 37827.61 亿美元、同比 +22.7%；汽车出口增速回落至 +37.6%<sup>[7]</sup><sup>[8]</sup><sup>[9]</sup></td></tr>
+      <tr><td>11-13</td><td>中国人民银行</td><td>10 月末社融存量 469.16 万亿元、同比 +7.2%；M2 余额 359.06 万亿元、同比 +7.1%；对实体经济人民币贷款余额 279.31 万亿元、同比 +4.6%<sup>[10]</sup></td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note"><b>怎么读这三个数</b>：PPI +5.7% 与 CPI +0.7% 的剪刀差走阔＝涨价停在上游（工业品、原料），没有传导到消费；社融 +7.2% 里政府债券余额 106.41 万亿元贡献突出、实体贷款只 +4.6%＝<b>私人信用需求仍弱</b><sup>[6]</sup><sup>[10]</sup>；出口 +35.2% 的强斜率里有抢出口与价格因素，汽车增速回落提示部分品类已在透支<sup>[8]</sup>。这组组合对股票的含义是：<b>上游资源与实际利率受益逻辑弱（上周有色/煤炭恰恰领跌），中游涨价（半导体材料）有叙事支撑，消费链条缺数据支撑。</b></p>
+  <h3>央行操作与制度</h3>
+  <ul class="tight">
+    <li><b>OMO</b>：11-12 开展 3840 亿元隔夜逆回购（利率 1.25%）、净投放 1970 亿元；11-13 开展 3640 亿元隔夜（全额满足一级交易商需求）＋3000 亿元 7 天期，合计 6640 亿元——<b>10-31 新机制（隔夜每个工作日招标、7 天期改多重价位中标并在税期月末操作）落地后首次"隔夜＋7 天"搭配</b><sup>[14]</sup><sup>[15]</sup>。11-09/10/11 三日净额未取证<span class="tag-verify">⚠️</span>。</li>
+    <li><b>买断式逆回购</b>：11-05 已缩量续作 3000 亿元 3 个月期（当月到期 5000 亿、净回笼 2000 亿）；公告 11-16 再开展 2000 亿元 6 个月期（到期 3000 亿、净回笼 1000 亿）——<b>11 月买断式合计净回笼 3000 亿元，10 月为净投放 4000 亿元</b>。东方金诚王青：流动性偏松下连续中期净回笼有助遏制资金利率过度下行<sup>[13]</sup>。</li>
+    <li><b>短端利率</b>：DR001 11 月内均值约 1.30%（媒体口径，截至 11-13）、10 月 1.28%<sup>[13]</sup>；DR007 与 SHIBOR 逐日序列本期仍取不到（中国货币网接口字段为空）<span class="tag-verify">⚠️</span><sup>[35]</sup>。</li>
+  </ul>
+  <h3>中美经贸：两边同时把"暂停"续期</h3>
+  <ul class="tight">
+    <li>国务院关税税则委员会 11-09 公告：自 11-10 13:01 起<b>继续暂停实施 24% 对美加征关税 2 个月</b>，保留 10%<sup>[11]</sup>；商务部、海关总署 2026 年第 58 号公告：<b>11-11 至 2027-01-10 继续暂停</b>稀土设备/原辅料/技术、超硬材料、锂电等六项出口管制措施<sup>[12]</sup>。美方 178 项 301 关税豁免及港口费暂停期同步延至 2027-01-09<sup>[12]</sup><span class="tag-verify">⚠️</span>（USTR 原文未取到）。</li>
+    <li><b>对市场的含义要看兑现顺序</b>：上期把"11-10 管制到期"列为最大尾部风险，本期双方同步续期、风险解除——但 11-10/11-11 科技链不涨反跌（见 §08），<b>说明利好早已计入价格，"落地即兑现"本身成了 11-12 下跌的助推。这条教训直接写进 §11 情景推演的证伪信号。</b></li>
+  </ul>
+  <h3>监管与发行</h3>
+  <ul class="tight">
+    <li>上交所 11-09 至 11-13：对 95 起拉抬打压、虚假申报等异常交易自律监管；<b>对全球芯片 LOF 等高溢价基金重点监控</b>；受理 46 家企业发债申请<sup>[4]</sup>。</li>
+  </ul>
+</section>
+<!-- ============ 06 海外政策 ============ -->
+<section id="s06">
+  <h2><span class="no">06</span>海外宏观与政策</h2>
+  <div class="card accent"><h4>一句话总结</h4>
+    <p><b>美国通胀数据把 12 月加息定价推到几乎满格（25bp 概率 95.6%），美债 10Y 一周 +29bp 到 5.15%、2Y +37bp——分母端收紧才是本周全球资产的真实驱动；英伟达换帅则把 AI 叙事的分子端改成了治理风险溢价。</b></p></div>
+  <h3>美国数据与美联储</h3>
+  <table>
+    <thead><tr><th>日期</th><th>事件</th><th>读数与定价</th></tr></thead>
+    <tbody>
+      <tr><td>11-10</td><td>10 月 CPI（BLS）</td><td>季调环比 +0.4%（预期 +0.3%、前值 +0.6%），核心环比 +0.3%（预期 +0.2%）；因去年政府停摆，本月无年度同比参照<sup>[19]</sup><span class="tag-verify">⚠️</span></td></tr>
+      <tr><td>11-10</td><td>CME FedWatch</td><td>12-09 会议加息 25bp 概率 <b>95.6%</b>（维持 4.4%），一周 +18.2pct、一月 +25.8pct；若落地，目标区间升至 4.00%—4.25%<sup>[16]</sup>；50bp 隐含概率由 0 升至 13.6%（《巴伦周刊》转述）<sup>[18]</sup></td></tr>
+      <tr><td>11-10</td><td>理事沃勒讲话</td><td>支持 12 月加息 25bp，称若核心通胀高企不排除更大幅度<sup>[17]</sup></td></tr>
+      <tr><td>11-13</td><td>10 月 PPI（BLS）</td><td>同比 +6.5%（前值 6.3%），2022 年 11 月以来最高；环比 +0.3%（预期 +0.4%），9 月由 +1.3% 上修至 +1.4%<sup>[20]</sup></td></tr>
+      <tr><td>11-12</td><td>英伟达治理事件</td><td>董事会公告黄仁勋辞去总裁/CEO/董事、即刻生效，CFO Colette Kress 临时代行 CEO，黄转任董事会主席<sup>[23]</sup>；NVDA 当日收跌，费城半导体周五 -3.43%<sup>[3]</sup></td></tr>
+      <tr><td>11-09 至 13</td><td>美债供给与利率</td><td>10Y 官方日度：4.88→4.98→(11-11 退伍军人节休市)→5.10→<b>5.15%</b>；2Y 4.51→4.88、30Y 至 5.47%<sup>[21]</sup></td></tr>
+    </tbody>
+  </table>
+  <h3>其他央行与地缘</h3>
+  <ul class="tight">
+    <li><b>日欧：利率全线抬升</b>。日债 10Y 升至 2.8896%（东财快照口径，11-13）、德债 10Y +13.4bp 至 3.376%、英债 10Y +17.8bp 至 5.4805%<sup>[22]</sup>；日本央行 12 月会议日期本期未取证<span class="tag-verify">⚠️</span>。<b>全球长端同向 2—3 周上行，说明这不是单一国家的通胀意外，而是期限溢价的重定价。</b></li>
+    <li><b>贵金属：紧缩定价最直接的受害者</b>。伦敦金 11-12 盘中 3852.48 美元/盎司创逾一年新低、全周约 -4.6%，COMEX 金录 6 月初以来最大单周跌幅；白银 -6.38%<sup>[43]</sup>。年初金价曾冲高至 5598 美元上方，年内已近腰斩式回撤<sup>[43]</sup>——<b>实际利率上行环境里，"避险资产"让位于"生息资产"。</b></li>
+    <li><b>中美窗口期</b>：双方暂停期同步延至 2027-01-09/10（见 §05），11-18/19 APEC 深圳期间的元首互动是下一个可核验节点<sup>[41]</sup>。</li>
+  </ul>
+  <p class="chart-note"><b>海外→A 股的传导在本周具体走了三条路</b>：① 美债利率 → 全球成长股贴现率 → A 股算力硬件周五杀估值（§04/§08）；② 英伟达换帅 → CPO/光模块订单可见性存疑 → 主力两日净卖出超 250 亿（§04）；③ 中美互延暂停期 → 管制尾部风险解除 → 利好兑现变回吐（§05）。每条路的证据都在前文有编号来源，第③条属推断。</p>
+</section>
+<!-- ============ 07 政策雷达 ============ -->
+<section id="s07">
+  <h2><span class="no">07</span>政策与数据雷达（四态追踪）</h2>
+  <table>
+    <thead><tr><th>事项</th><th>主体</th><th>状态</th><th>关键日期</th><th>市场作用点</th></tr></thead>
+    <tbody>
+      <tr><td>隔夜逆回购新机制（每工作日招标）＋7 天期多重价位中标</td><td>央行</td><td>已公布→<b>落地承接中</b>：11-13 首次"隔夜+7天"搭配 6640 亿</td><td>11-02 生效<sup>[14]</sup><sup>[15]</sup></td><td>短端资金利率锚；DR001 均值 1.30% 附近钉住</td></tr>
+      <tr><td>买断式逆回购缩量续作（11 月净回笼 3000 亿）</td><td>央行</td><td>已公布→细则生效：</td><td>11-16 开展 2000 亿 6M<sup>[13]</sup></td><td>中期流动性收敛表态，压制资金利率下行</td></tr>
+      <tr><td>暂停 24% 对美关税续期</td><td>国务院关税税则委</td><td>已公布→已生效</td><td>11-10 13:01 起 2 个月<sup>[11]</sup></td><td>出口链风险溢价；兑现即回吐（§05）</td></tr>
+      <tr><td>六项稀土/超硬/锂电出口管制暂停续期</td><td>商务部、海关总署</td><td>已公布→已生效</td><td>11-11 至 2027-01-10<sup>[12]</sup></td><td>科技链管制尾部风险解除至 APEC 后</td></tr>
+      <tr><td>美方 178 项 301 关税豁免/港口费暂停延期</td><td>USTR</td><td>已公布（原文未取）<span class="tag-verify">⚠️</span></td><td>至 2027-01-09<sup>[12]</sup></td><td>与中方续期互为镜像，观察 APEC 是否变协议</td></tr>
+      <tr><td>10 月 CPI/PPI、进出口、金融数据</td><td>统计局/海关/央行</td><td>已公布→已解读（见 §05）</td><td>11-09/10/13<sup>[5]</sup><sup>[7]</sup><sup>[10]</sup></td><td>PPI-CPI 剪刀差→上游涨价交易</td></tr>
+      <tr><td>11 月 LPR 报价</td><td>央行授权公布</td><td>已排期</td><td>11-20<sup><span class="tag-verify">⚠️</span></sup></td><td>近期操作偏收，下调概率低（推断）</td></tr>
+      <tr><td>APEC 领导人非正式会议（深圳）</td><td>中方东道主</td><td>已排期确定</td><td>11-18/19（工商峰会 11-17/18）<sup>[41]</sup></td><td>中美元首互动→关税/管制叙事再定价</td></tr>
+      <tr><td>中央经济工作会议</td><td>中共中央</td><td>市场预期（日期未官宣）<span class="tag-verify">⚠️</span></td><td>11 月下旬至 12 月上旬</td><td>"十五五"开局年政策总纲</td></tr>
+      <tr><td>异常交易监管与高溢价 LOF 重点监控</td><td>上交所</td><td>生效执行中</td><td>本周 95 起<sup>[4]</sup></td><td>跨境 ETF/LOF 溢价品种炒作降温（§14）</td></tr>
+      <tr><td>12 月 FOMC</td><td>美联储</td><td>已排期确定</td><td>12-09；当前 25bp 定价 95.6%<sup>[16]</sup></td><td>全球贴现率；A 股成长股分母端</td></tr>
+      <tr><td>70 城房价（10 月）</td><td>国家统计局</td><td>已排期</td><td>11-16<sup>[5]</sup></td><td>地产链与固投读数</td></tr>
+    </tbody>
+  </table>
+</section>
+<!-- ============ 08 A股结构 ============ -->
+<section id="s08">
+  <h2><span class="no">08</span>A 股市场结构：一条主线、一次切换、一周缩量</h2>
+  <h3>主线判定（四条证据交叉）</h3>
+  <ul class="tight">
+    <li><b>① 涨幅</b>：通信设备 +3.80%、传媒 +2.44%、半导体 +2.24%、银行 +2.13% 领涨（东财 BK 口径）<sup>[31]</sup>；<b>② 资金</b>：半导体主力 +88.74 亿、通信设备 +36.71 亿、银行 +25.04 亿，涨幅与资金<b>同向</b>的只有算力硬件与银行两条线<sup>[31]</sup>；<b>③ 涨停集中</b>：11-10 光学光电 6 家/消费电子 4 家、11-11 通信设备 7 家/元件 5 家<sup>[30]</sup>；<b>④ 成交额占比</b>：push2his 断连未取证<span class="tag-verify">⚠️</span>。<b>结论：本周主线＝AI 算力硬件（半导体＋通信设备＋CPO/光模块），三条证据成立；银行是"资金同向但涨停不集中"的防守线，不称主线。</b></li>
+    <li><b>轮动名单（有涨幅没资金）</b>：传媒 +2.44%／-28.26 亿（上周主线本周退化）、元件 +1.43%／-6.65 亿、消费电子 +1.40%／-15.61 亿<sup>[31]</sup>。</li>
+    <li><b>涨停扩散不算主线</b>：全周涨停行业前三是汽车零部件 33 家、通用设备 22 家、专用设备/游戏/元件/通信设备各 11—14 家，但汽车与设备的周涨跌和主力净额未取证，第四条也缺——只能写"涨停向中游制造扩散"，不能升格为主线<sup>[30]</sup>。</li>
+  </ul>
+  <div class="card"><h4>东财 BK 行业周涨跌幅（%）</h4><div id="c-ind" class="chart"></div>
+    <p class="chart-note">口径＝东方财富行业板块（BK），与申万一级不等价<sup>[31]</sup><sup>[44]</sup>。<b>上周五条主线（半导体、光伏、传媒、电池、贵金属）本周只剩半导体活着</b>：光伏设备 -6.67%、贵金属 -6.17%（伦敦金 -4.6%<sup>[43]</sup>）、能源金属 -5.73%、电池 -4.33%/主力 -94.10 亿、有色 -2.97%/-95.93 亿<sup>[31]</sup>。</p></div>
+  <h3>宽度逐日台账（涨停池 date 参数逐日回取，本期新路线）</h3>
+  <table>
+    <thead><tr><th>日期</th><th>涨停</th><th>跌停</th><th>炸板</th><th>封板率</th><th>连板≥2</th><th>晋级率</th><th>最高连板</th><th>涨停集中（行业）</th></tr></thead>
+    <tbody>
+      <tr><td>11-09</td><td class="num">54</td><td class="num">1</td><td class="num">44</td><td class="num down">55.10%</td><td class="num">9</td><td class="num">—</td><td class="num">6</td><td>通用设备 5、汽车零部件 5、元件 3</td></tr>
+      <tr><td>11-10</td><td class="num">93</td><td class="num">0</td><td class="num">19</td><td class="num up">83.04%</td><td class="num">20</td><td class="num">37.0%</td><td class="num">7</td><td>汽车零部件 11、通用设备 6、光学光电 6</td></tr>
+      <tr><td>11-11</td><td class="num">85</td><td class="num">0</td><td class="num">19</td><td class="num up">81.73%</td><td class="num">19</td><td class="num">20.4%</td><td class="num">4</td><td>汽车零部件 10、通用设备 8、通信设备 7</td></tr>
+      <tr><td>11-12</td><td class="num">37</td><td class="num">5</td><td class="num">35</td><td class="num down">51.39%</td><td class="num">11</td><td class="num down">12.9%</td><td class="num">5</td><td>一般零售 3、专用设备 3（无算力行业）</td></tr>
+      <tr><td>11-13</td><td class="num">37</td><td class="num">33</td><td class="num">21</td><td class="num">63.79%</td><td class="num">7</td><td class="num">18.9%</td><td class="num">4</td><td>汽车零部件 6、影视院线 5</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note">全周涨停 306 家次。封板率＝涨停÷(涨停＋炸板)、晋级率＝当日连板≥2 家数÷前日涨停家数，均为自算口径<sup>[30]</sup>。11-09 晋级率缺分母（11-06 池未回取）。<b>媒体旁证</b>：11-11 超 3500 只上涨、创业板 +3.11%；11-12 超 4600 只下跌；11-13 超 4700 只下跌、两市 16556.68 亿元缩量 2764 亿<sup>[24]</sup>。<b>本节公开纠错：前两期规范认定"涨停池 date 参数被忽略、上周逐日只能靠媒体复盘"，本期实测 date=YYYYMMDD 生效（需带 sort 参数，否则返回 rc:102）——上表全部为接口直取数据，见 §15。</b></p>
+  <h3>为什么涨跌：把行情、ETF、期指、海外串成一条链</h3>
+  <ul class="tight">
+    <li><b>11-09 至 11-11 的上涨</b>：CPI/PPI 落地靴子解除＋中美互延暂停期把管制尾部风险清零（§05，有数据）→ 主力向算力硬件集中（11-11 CPO 单日 +205.54 亿，§04，有数据）→ 情绪指标同日见顶：涨停 93→85、封板率 83.04%/81.73%（有数据）。<b>这段上涨里两融只温和加杠杆（+77 亿/日），领涨资金是现货型——解释了为什么它怕利率而不是怕监管。</b></li>
+    <li><b>11-12 的转折先死在宽度，没死在指数</b>：指数只跌 0.68%，但涨停腰斩 85→37、炸板 35 家、封板率 51.39%、晋级率 12.9%，涨停行业里算力清零（有数据）。触发在美债破 5.10% 与英伟达换帅（§06，有数据）。<b>"指数跌幅滞后宽度崩塌一天"是本期最值得记住的结构。</b></li>
+    <li><b>11-13 的下跌是定价补跌，不是新增利空</b>：当日无重磅数据，跌的是前两天的宽度窟窿（跌停 33、超 4700 只下跌，有数据）；同期 ETF 份额宽基净赎回、期指净空收窄但贴水走阔（§02/§03，有数据）——<b>推断环节：机构在降低 beta（撤申购、撤对冲多头、期货贴水加深），而非加空攻击；主体证据缺失，挂待核。</b></li>
+  </ul>
+</section>
+<!-- ============ 09 汇率与债券 ============ -->
+<section id="s09">
+  <h2><span class="no">09</span>汇率与债券：人民币最稳，中美利差继续走阔</h2>
+  <table>
+    <thead><tr><th>品种</th><th>11-06→11-13</th><th>变动</th><th>口径</th></tr></thead>
+    <tbody>
+      <tr><td>美元指数</td><td class="num">102.30→103.41</td><td class="num up">+1.08%</td><td>东财 100.UDI 日K<sup>[1]</sup><sup>[3]</sup></td></tr>
+      <tr><td>美元兑离岸人民币</td><td class="num">6.6738→6.6747</td><td class="num">+0.01%</td><td>东财 133.USDCNH／腾讯<sup>[3]</sup></td></tr>
+      <tr><td>人民币中间价（逐日）</td><td class="num">未取证<span class="tag-verify">⚠️</span></td><td class="num">—</td><td>中国货币网历史接口失效，仅当日可取<sup>[35]</sup></td></tr>
+      <tr><td>中债 10Y</td><td class="num">1.5933%→1.6181%</td><td class="num">+2.5bp</td><td>东财 171.CN10Y<sup>[22]</sup>；官方序列 11-09 1.5807→11-11 1.5883，两源幅度同向、水平有差<sup>[35]</sup></td></tr>
+      <tr><td>中债 30Y / 2Y</td><td class="num">2.0846% / 1.2450%</td><td class="num">+5.2bp / +1.4bp</td><td>171.CN30Y、171.CN2Y<sup>[22]</sup></td></tr>
+      <tr><td>美债 10Y</td><td class="num">4.86%→5.15%</td><td class="num">+29bp</td><td>美国财政部官方日度 CSV<sup>[21]</sup></td></tr>
+      <tr><td>美债 2Y / 30Y</td><td class="num">4.88% / 5.47%</td><td class="num">+37bp / +21bp</td><td>同上<sup>[21]</sup></td></tr>
+      <tr><td>日债/德债/英债 10Y</td><td class="num">2.8896% / 3.376% / 5.4805%</td><td class="num">+19.6bp / +13.4bp / +17.8bp</td><td>东财 171.* 快照口径<sup>[22]</sup></td></tr>
+    </tbody>
+  </table>
+  <h3>股债性价比（1/PE − 中债10Y，PE 用蛋卷口径、数据日 11-13）</h3>
+  <table>
+    <thead><tr><th>指数</th><th>PE</th><th>PE 分位（该数据商窗口）</th><th>股息率</th><th>1/PE−10Y</th></tr></thead>
+    <tbody>
+      <tr><td>红利低波（H30269）</td><td class="num">9.12</td><td class="num">80.12%</td><td class="num">4.58%</td><td class="num">9.35%</td></tr>
+      <tr><td>中证红利</td><td class="num">9.13</td><td class="num">87.36%</td><td class="num">4.48%</td><td class="num">9.33%</td></tr>
+      <tr><td>上证50</td><td class="num">11.71</td><td class="num">84.64%</td><td class="num">—</td><td class="num">6.92%</td></tr>
+      <tr><td>沪深300</td><td class="num">13.42</td><td class="num">65.40%</td><td class="num">—</td><td class="num">5.83%</td></tr>
+      <tr><td>中证500</td><td class="num">27.43</td><td class="num">58.12%</td><td class="num">—</td><td class="num">2.03%</td></tr>
+      <tr><td>中证1000</td><td class="num">37.89</td><td class="num">47.92%</td><td class="num">—</td><td class="num">1.03%</td></tr>
+      <tr><td>科创50</td><td class="num">93.50（上交所口径 87.2）</td><td class="num">75.08%</td><td class="num">—</td><td class="num down">-0.55%</td></tr>
+    </tbody>
+  </table>
+  <p class="chart-note"><b>分位口径＝该数据商历史窗口，与中证五年分位不可比</b>；000510 中证A500 连续四期无条目、标普红利低波50 亦无，估值缺口挂待核<sup>[34]</sup><sup>[4]</sup>。<b>两条含义</b>：① 中债 10Y 只 +2.5bp、中美利差倒挂扩至约 -353bp，人民币却几乎没贬（+0.01%）——本周汇率对紧缩的耐受度好于直觉，结汇与顺差（§05 出口 +35.2%）在对冲利差压力；② 科创50 的股债收益差为负、红利系 9.3% 上方——<b>在利率上行的全球环境里，A 股的防守资产配置优势在数学上更干净，这与 §01 周五红利逆势收红互为印证。</b></p>
+</section>
+<!-- ============ 10 持仓关联 ============ -->
+<section id="s10">
+  <h2><span class="no">10</span>我的持仓关联分析（只分析指数与基金暴露，不给加减仓比例）</h2>
+  <table>
+    <thead><tr><th>持仓标的（指数）</th><th>周涨跌</th><th>周五单日</th><th>位置与驱动</th><th>下一批要盯的</th></tr></thead>
+    <tbody>
+      <tr><td>中证A500（000510）</td><td class="num down">-1.46%</td><td class="num down">-1.17%</td><td>跌幅大于沪深300：权重里科技/中游占比高，恰是周五杀跌主力；锚 ETF A500ETF南方（159352）主力转正但份额 -14.61 亿（§02）<sup>[2]</sup><sup>[28]</sup></td><td>A500 系列份额是否续赎回；APEC 后关税表述</td></tr>
+      <tr><td>科创50（000688）</td><td class="num up">+2.11%</td><td class="num down">-2.30%</td><td>全周唯一收红宽基，但周五回吐 11-11/12 涨幅的三分之一；PE 93.5、股债收益差 -0.55%（§09），11-12 盘中 1364.88 为周内情绪极值<sup>[2]</sup><sup>[34]</sup></td><td>半导体主力能否回到日均 +20 亿上方；英伟达订单指引</td></tr>
+      <tr><td>纳指100（NDX）</td><td class="num up">+3.53%</td><td class="num down">-1.22%</td><td>加息定价 95.6% 下周仍收红，但周五随换帅转跌；对 A 股科技的映射本周"先跟涨、后领跌"<sup>[3]</sup></td><td>12-09 FOMC；SOX 周五 -3.43% 是否扩散</td></tr>
+      <tr><td>中证红利低波（H30269）</td><td class="num up">+0.57%</td><td class="num up">+1.24%</td><td>周内一度连跌三天（11-10 至 11-12 累 -1.07%），周五逆势拉红＝防守盘回流；PE 9.12、股息率 4.58%（§09）<sup>[2]</sup><sup>[34]</sup></td><td>银行板块资金持续性（本周 +25.04 亿）；LPR 11-20</td></tr>
+      <tr><td>标普中国A股大盘红利低波50（SPCLLHCP，ETF 515450 收盘代理）</td><td class="num up">+0.14%</td><td class="num up">+1.32%</td><td>方向与 H30269 同、幅度更小；代理值含费用与折溢价、非指数原值<sup>[2]</sup><sup>[28]</sup></td><td>指数原值仍无公开日频（官网 403，待核）</td></tr>
+      <tr><td>中证红利（000922，对照）</td><td class="num down">-0.38%</td><td class="num up">+0.34%</td><td>与红利低波周五同涨、全周分化<sup>[2]</sup></td><td>煤炭/石化的资金回流（本周仍 -11.41 亿）</td></tr>
+    </tbody>
+  </table>
+  <h3>两条红利线并排：差异来自样本与权重规则，不分好坏</h3>
+  <p>同族红利指数本周同日同向、幅度分档（周五：515450 代理 +1.32% ≈ H30269 +1.24% ＞ 000922 +0.34%；全周：+0.57%/+0.14%/-0.38%）。<b>低波与大盘样本的周五弹性来自银行权重与个股集中度规则，中证红利的行业分散让它跟涨更钝</b>——这是编制差异，不是产品优劣；两条线的估值分位（80.12% vs 87.36%，数据商窗口）都已不便宜<sup>[34]</sup>。</p>
+  <h3>两只主动基金</h3>
+  <ul class="tight">
+    <li><b>539002 建信新兴市场混合(QDII)A（主动新兴市场，不跟踪纳指）</b>：可核净值停在 <b>11-12 的 1.923</b>（披露为北京时间零点口径），11-06 1.746→11-12 <b>+10.14%</b><sup>[36]</sup>。驱动＝重仓台韩存储/代工与美股 AI 硬件（台积电、三星、美光、西数、闪迪、Lumentum、英伟达、ASML 等）恰是本周全球最强方向（KOSPI +4.56%、SOX +8.05%）<sup>[3]</sup>。<b>风险：11-13 美股科技回落与换帅冲击尚未进净值（QDII T+1 以上滞后），本周一二公布的净值会补跌；11-05 单日 -12.89% 的巨震说明它的波动远大于指数。</b>盯：最新净值两日修复度、台存储涨价月度数据。</li>
+    <li><b>019018 易方达信息产业混合C（主动偏股 TMT）</b>：净值 11-13 为 5.450，全周 <b>-0.64%</b>（11-06 5.485 起算），峰值 11-11 5.759（+5.00%）后两日 -5.37%<sup>[36]</sup>。持仓暴露＝CPO/光模块＋PCB＋消费电子代工链<sup>[36]</sup>，是 §04 主线在基金端的直接化身。<b>它跑输科创50（+2.11%）：周五杀跌那天它满仓挨打，反弹那天它没有指数弹性。</b>盯：净值 11-16/17 读数是否跌破 11-06 起点、光模块 800G/1.6T 订单新闻流。</li>
+  </ul>
+</section>
+<!-- ============ 11 情景 ============ -->
+<section id="s11">
+  <h2><span class="no">11</span>本周情景推演（11.16—11.22）</h2>
+  <p class="lead">这是概率排序，不是预测承诺；每条都给证伪信号。点位一律不预设，只给方向与触发条件。</p>
+  <table>
+    <thead><tr><th>对象</th><th>乐观</th><th>基准</th><th>悲观</th></tr></thead>
+    <tbody>
+      <tr><td>算力硬件（半导体/CPO，对应科创50、019018）</td><td>APEC 中美气氛实质缓和＋英伟达新管理层确认订单指引 → 主力日均回到 +20 亿上方，涨停池算力行业回归。证伪：美 10Y 站稳 5.15% 上方且 CPO 再连两日净流出</td><td>缩量震荡消化换帅冲击，板块在 11-06 水平 ±3% 内拉锯，宽度（封板率 60%＋）先于指数修复。证伪：单日主力 ±100 亿级异动</td><td>美债利率续升＋英伟达二次下修 → 复制 11-12/13 结构：宽度先崩、指数补跌。信号：跌停家数连续两日 >80、晋级率 <15%</td></tr>
+      <tr><td>大盘宽基（沪深300/中证A500，对应 510300、159352）</td><td>中央经济工作会议预期发酵＋宽基份额止住净赎回 → 收复对上周五基准（11-06 收盘）的向下缺口。证伪：宽基份额再单周流出 >300 亿</td><td>缩量在上周周内高低点构成的箱体内震荡，等 LPR 与会议定调。证伪：单日主力 ±100 亿级异动</td><td>ETF 赎回与期指贴水负循环（份额 -400 亿级＋IF 贴水再走阔）→ 补跌上周五缺口。信号：两融单日 -300 亿</td></tr>
+      <tr><td>红利防守（H30269/515450/000922）</td><td>紧缩定价持续 → 红利周五式回流变常态，相对收益续走阔。证伪：银行主力净额转连续两日流出</td><td>低位区间内防守属性保留，绝对收益平淡（PE 分位 80%+ 决定上行钝）。证伪：股息率差收窄至 8% 下方</td><td>利率见顶回落＋成长二次进攻 → 高低切回科技，红利补跌（复制 W45 §10 剧本）。信号：科创50 单日 +3% 且红利放量下跌</td></tr>
+      <tr><td>美股科技（纳指100，映射 539002）</td><td>换帅平稳过渡＋12 月加息落地即靴子解除 → SOX 守住上周收盘位、539002 净值修复。证伪：Colette Kress 记者会下调数据中心收入口径</td><td>高利率＋治理不确定性，纳指100 在上周收盘下方宽幅震荡。证伪：10Y 回落至 5.0% 下方且 VIX 不涨</td><td>利率与治理双杀：10Y 续上 5.2% 或换帅引发客户订单观望 → 科技重演 11 月第一周式暴跌，QDII 净值 T+1 滞后放大错觉。信号：美债周度 +20bp 以上</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 12 日历 ============ -->
+<section id="s12">
+  <h2><span class="no">12</span>本周财经日历（11.16—11.22）</h2>
+  <table>
+    <thead><tr><th>日期</th><th>事件</th><th>性质</th></tr></thead>
+    <tbody>
+      <tr><td>11-16 周一</td><td>央行 2000 亿元 6 个月买断式逆回购落地（当日 3000 亿到期）；统计局 10 月 70 城房价；每日隔夜 OMO</td><td>已排期确定<sup>[13]</sup></td></tr>
+      <tr><td>本周内</td><td>统计局 10 月工业增加值/社零/固投发布窗口（具体日以发布 schedule 为准）</td><td>已排期、日未取证 <span class="tag-verify">⚠️</span></td></tr>
+      <tr><td>11-17/18</td><td>APEC 工商领导人峰会（深圳）</td><td>已排期确定<sup>[41]</sup></td></tr>
+      <tr><td>11-18/19</td><td>APEC 第三十三次领导人非正式会议（深圳）；中美元首会晤预期</td><td>会议已排期；会晤属预期<sup>[41]</sup></td></tr>
+      <tr><td>11-20 周五</td><td>11 月 LPR 报价</td><td>已排期确定<sup><span class="tag-verify">⚠️</span></sup></td></tr>
+      <tr><td>本周待定</td><td>英伟达新管理层首次业绩沟通/闭门简报（日期未见官方排期）</td><td>市场预期（东吴证券转述口径）<span class="tag-verify">⚠️</span></td></tr>
+      <tr><td>11 月下旬</td><td>中央经济工作会议</td><td>市场预期，日期未官宣 <span class="tag-verify">⚠️</span></td></tr>
+      <tr><td>12-09</td><td>FOMC（25bp 定价 95.6%、50bp 隐含 13.6%）——本周进入官员静默期前的表态窗口</td><td>已排期确定<sup>[16]</sup><sup>[18]</sup></td></tr>
+    </tbody>
+  </table>
+</section>
+<!-- ============ 13 机构观点 ============ -->
+<section id="s13">
+  <h2><span class="no">13</span>机构与分析师观点摘编（含分歧；除标注外均为媒体转述，非报告原文）</h2>
+  <ul class="tight">
+    <li><b>招商证券</b>（2026-11 月度策略，转述）：当前市场核心矛盾是<b>筹码压力导致的资金负反馈</b>，判断"温和触底后迎来反弹"，配置"先守后攻，静待花开"<sup>[39]</sup>——偏谨慎空方，与本期 §02 份额赎回、§03 贴水走阔同构。</li>
+    <li><b>中信建投证券·夏凡捷</b>（21 世纪经济报道 11-11 策略会报道）：2027 年是"盈利下行、贴现率下行"的交接年，A 股宽幅震荡走出"N 型"，建议均衡配置、灵活调整<sup>[38]</sup>——中性，把贴现率列为变量而非风险出清。</li>
+    <li><b>中国证券报综述多家券商 11 月策略</b>（央广网 11-04 转载）：配置思路由偏防御转向<b>攻守兼备</b>，低估值稳业绩与电子科技并行<sup>[40]</sup>——偏多方；与招商"负反馈"判断构成本期多空分歧的主轴。</li>
+    <li><b>东方金诚·王青</b>（新华社 11-13 采访）：流动性偏松背景下，买断式逆回购连续中期净回笼有助遏制资金利率过度下行<sup>[13]</sup>——对央行"钉住短端而非放水"的官方口径转述。</li>
+    <li><b>长城基金</b>（中国基金报 11-15 周评转述）：杠杆资金此前连续多周下降、本周才企稳，两融交易占比仍在历史较低分位<sup>[25]</sup>——增量杠杆缺席，反弹质量受限。</li>
+    <li><b>《巴伦周刊》/CME 隐含定价</b>（11-10 转述）：12 月加息 50bp 的市场隐含概率由 0 升至 13.6%<sup>[18]</sup>——海外紧缩侧的空方证据，对 A 股成长为纯分母压力。<span class="tag-verify">⚠️</span>（未取报告原文）</li>
+  </ul>
+  <p class="chart-note"><b>观点核对纪律</b>：本期未检索到任何机构在 11-09—11-15 针对"英伟达换帅"或"美债 5.15%"落款的成文报告，故本节不虚构此类观点；上列六条全部给出主体、日期与转述渠道，两处"未取证原文"已标 ⚠️。</p>
+</section>
+
+<!-- ============ 14 工具层 ============ -->
+<section id="s14">
+  <h2><span class="no">14</span>工具层提醒</h2>
+  <ul class="tight">
+    <li><b>两套 ETF 资金口径必须分开查</b>：份额净申购看基金定期公告与媒体日频统计<sup>[25]</sup>，场内主力净额看逐日分档接口<sup>[31]</sup>；本期同只产品两口径反号（588000：+19.15 亿 vs -60.42 亿），<b>任何只报一边的"资金进出"结论都不可信。</b></li>
+    <li><b>跨境 ETF/LOF 溢价风险正在被监管点名</b>：上交所对全球芯片 LOF 等高溢价基金重点监控<sup>[4]</sup>——追高溢价品种的隐性成本是折价回归＋可能的临时停牌。</li>
+    <li><b>QDII 净值时滞</b>：539002 可核净值停在 11-12，11-13 美股回落将在 11-16/17 公布值中体现；<b>周日晚看到的"最新净值"永远不是最新行情，判断要用净值日期倒推行情日。</b></li>
+    <li><b>基金净值时间戳是北京时间零点</b>：按 UTC 取整会整体错后一天（本期 539002 的周内区间与峰值日都曾因这个口径错过一次，见 §15 纠错）。</li>
+    <li><b>本期新固化的取数口径</b>：涨停/跌停/炸板池 <code>push2ex/getTopic*(date=YYYYMMDD)</code> <b>必须同时带 <code>sort=fbt%3Aasc</code>，否则返回 rc:102 空数据</b>；封板率、晋级率无公开现成指标，按 §08 自算公式。标普红利低波50 指数仍无日频（官网 403），代理口径见 §01 注<sup>[45]</sup>。</li>
+    <li><b>push2his 白天会整段拒连</b>：本期 11:41—11:52 全断，板块资金流数据只有 09:04 一份记录——<b>每周一务必在上午完成全部逐日取数并落盘。</b></li>
+  </ul>
+</section>
+<!-- ============ 15 来源 ============ -->
+<section id="src">
+  <h2><span class="no">15</span>数据来源、待核清单与本期纠错</h2>
+  <p class="lead">B 级数据源（本地 MCP）本期复测仍全部返回 <code>40001 您无可用的资源包</code>，数字整批来自规范 §2.5 公开接口与 A/C 级来源。抓取时点：境内逐日行情与涨跌停池 11-16 09:04—13:05（push2his 于 11:41—11:52 一度整段拒连，板块资金流仅存 09:04 一份记录）；腾讯日K、美债官方 CSV、两融、估值、基金接口 11-16 11:40—13:10 复核复现。</p>
+  <div class="src"><ol start="1">
+    <li>东方财富 指数日K接口（收盘/成交额/区间涨跌）：https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=1.000001&amp;klt=101&amp;fqt=1&amp;lmt=12&amp;end=20500101&amp;fields1=f1,f2,f3&amp;fields2=f51,f53,f56,f57 ；同法 secid=1.000300、1.000510、1.000688、0.399001、0.399006、1.000905、1.000852、1.000016、1.000922、2.H30269、1.515450、1.512890。<b>返回含当日未完成一根，只取已完成交易日</b></li>
+    <li>腾讯 指数/ETF 日K（本期境内指数逐日全序列，11-16 11:40 取得并逐项与 09:04 东财批次互验）：https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,day,2026-11-06,2026-11-13,8,qfq ；同法 sz399001、sh000300、sh000510、sh000688、sz399006、sh000905、sh000852、sh000016、sh000922、sh512890、sh515450</li>
+    <li>东方财富 境外指数与商品日K：https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=100.NDX100&amp;lmt=12&amp;fields2=f51,f53 ；同法 100.NDX（纳指综合）、100.SPX、100.DJIA、100.HSI、124.HSTECH、251.SOX、251.HXC、100.N225、100.KS11、100.FTSE、100.SX5E、100.UDI、133.USDCNH、112.B00Y、101.GC00Y、101.SI00Y、101.HG00Y；11-13 收盘以腾讯 https://qt.gtimg.cn/q=usNDX,usIXIC,usINX,usDJI,hkHSI 快照交叉复现（NDX 27943.74／IXIC 25136.27／SPX 7561.67／DJI 52347.55）</li>
+    <li>上海证券交易所《沪市市场运行情况例行发布》（2026-11-09 至 11-13，官网栏目）：https://www.sse.com.cn/aboutus/mediacenter/conference/ ；本期限量数据：上证综指 3634／周 -0.41%／上证 PE 16.0；科创50 1280／+2.11%／PE 87.2；沪市 ETF 份额 22399 亿份、市值 35838 亿元；95 起异常交易监管；46 家发债受理</li>
+    <li>国家统计局《2026 年 10 月份居民消费价格同比上涨 0.7%》（2026-11-09）：https://www.stats.gov.cn/sj/zxfb/202611/t20261109_1965795.html</li>
+    <li>国家统计局城市司董莉娟解读 2026 年 10 月 CPI/PPI（PPI 同比 +5.7%、环比 +0.7%、购进 +7.9%）（2026-11-09）：https://www.stats.gov.cn/sj/sjjd/202611/t20261109_1965796.html</li>
+    <li>海关总署《2026 年 10 月全国进出口总值表（美元值）》（2026-11-10）：http://www.customs.gov.cn/customs/2026-11/10/article_2026111009530967537.html</li>
+    <li>财新《10 月出口同比超预期高增 35.2% 汽车出口增速高位回落至 37.6%》（2026-11-10）：https://economy.caixin.com/2026-11-10/102503103.html</li>
+    <li>中国机电产品进出口商会《2026 年 1-10 月全国外贸进出口统计快报》（进口 3070.5 亿美元、同比 +41.6%；进出口 7193.8 亿、+37.9%）：https://www.cccfna.org.cn/maoyitongji/tongjikuaibao/ff808081a133756f01a1c82613fb139b.html</li>
+    <li>央视财经转载央行《2026 年 10 月金融统计数据》（社融存量 469.16 万亿 +7.2%、M2 359.06 万亿 +7.1%、实体贷款 279.31 万亿 +4.6%、政府债券 106.41 万亿）（2026-11-13）：https://jingji.cctv.com/2026-11-13/ARTI5uzD2BrB4wXFaLmtOMEd261113.shtml</li>
+    <li>国务院关税税则委员会公告及解读（自 11-10 13:01 起 2 个月内继续暂停 24% 对美加征关税、保留 10%）（2026-11-09）：http://gss.mof.gov.cn/gzdt/zhengcejiedu/202611/t20261109_4004261.htm</li>
+    <li>商务部、海关总署公告 2026 年第 58 号（2026-11-11 至 2027-01-10 继续暂停 2025 年第 55—58、61、62 号公告六项管制措施）：全文转载 https://www.cs-re.org.cn/policy/a4681.html ；HKTDC 研究简报 https://research.hktdc.com/sc/article/MjE2NTI4MjQ4NA</li>
+    <li>新华社《央行将开展 2000 亿元买断式逆回购操作 缩量续作稳定市场预期》（11-16 开展 6 个月期 2000 亿、当月到期 3000 亿、11 月两品种合计净回笼 3000 亿；含东方金诚王青点评）（2026-11-13）：http://www.xinhuanet.com/20261113/5c6c9a19845f4c77afe1418810ff4b23/c.html ；财联社同题 https://finance.eastmoney.com/a/202611133930825688.html</li>
+    <li>搜狐财经《央行 11 月 5 日开展 3000 亿元 3 个月期买断式逆回购》（含央行 10-30 公告：11-02 起隔夜逆回购每工作日招标、利率 1.25%，7 天期改多重价位中标、税期月末操作）（2026-11-05）：https://www.sohu.com/a/1097360131_122014422</li>
+    <li>中国人民银行官网公开市场业务交易公告（11-12：3840 亿隔夜、净投放 1970 亿；11-13：3640 亿隔夜＋3000 亿 7 天）：https://www.pbc.gov.cn/</li>
+  </ol></div>
+  <div class="src"><ol start="16">
+    <li>钛媒体《CME FedWatch：美联储 12 月加息 25 个基点的概率升至 95.6%》（2026-11-10）：https://www.tmtpost.com/nictation/8199993.html ；金融界同题（较一周前 +18.2pct、较一月前 +25.8pct）https://m.jrj.com.cn/madapter/stock/2026-11-10174559087559.shtml</li>
+    <li>美联储理事沃勒 11-10 讲话（支持 12 月加息 25bp、核心通胀高企或需更大幅度；金十数据电报转载）：https://m.sohu.com/a/1099719338_114984</li>
+    <li>《巴伦周刊》转述 CME FedWatch：12 月加息 50bp 隐含概率由 0 升至 13.6%（2026-11-10；社媒分发，未取报告原文，标 ⚠️）：https://x.com/CausMoney/status/2120166518457569416 ；旁证（12 月完全排除按兵不动、50bp 定价 11.2%，另一时点）https://cn.investing.com/news/economy-news/article-3661070</li>
+    <li>澎湃新闻《美国 10 月 CPI 环比上涨 0.4% 超预期》（BLS 11-10 发布；环比 +0.4%/预期 +0.3%/前值 +0.6%，核心 +0.3%/预期 +0.2%）：https://www.thepaper.cn/newsDetail_forward_34446690</li>
+    <li>财联社《美国 10 月 PPI 通胀同比涨幅创近四年新高》（同比 +6.5%、环比 +0.3%、9 月由 +1.3% 上修至 +1.4%）（2026-11-13）：https://www.cls.cn/detail/2534252</li>
+    <li>美国财政部 日度国债收益率曲线 CSV（A 级官方；10Y 4.88→5.15、2Y 4.51→4.88、30Y 至 5.47；11-11 退伍军人节无报价；本期 11:40 批次抓取成功）：https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&amp;field_tdr_date_value=2026&amp;page&amp;_format=csv</li>
+    <li>东方财富 国债收益率日K序列：https://push2his.eastmoney.com/api/qt/stock/kline/get?secid=171.CN10Y&amp;lmt=12&amp;fields2=f51,f53 ；同法 171.CN30Y、171.CN2Y、171.JP10Y、171.KR10Y、171.DE10Y、171.GB10Y（东财口径与官方序列水平有差、幅度同向，正文两处均标注来源）</li>
+    <li>凤凰网（网通社快报）《英伟达 CEO 黄仁勋于 11 月 12 日辞去职务，CFO Colette Kress 出任临时 CEO》（2026-11-13）：https://auto.ifeng.com/c/8y18BsBnxh4 ；智源社区转董事会公告要旨 https://hub.baai.ac.cn/view/59653</li>
+    <li>财联社《【每日收评】创业板指震荡走低跌超 3%，全市场逾 4700 股收绿》（2026-11-13）：https://www.cls.cn/detail/2533898 ；钛媒体同题（沪指 -0.59% 报 3634.35、缩量口径）https://www.tmtpost.com/nictation/8204264.html ；央广财经 https://finance.cnr.cn/ycbd/20261113/t20261113_527871112.shtml</li>
+    <li>中国基金报《宽基 ETF 终结八周净流入，半导体却逆市吸金》（份额周度：全部 ETF -525.8 亿、宽基 -432.23 亿、债券 -171.06 亿、行业主题 +57.33 亿；半导体材料设备主题明细；管理人进出；两融企稳点评；2026-11-15）：https://www.21jingji.com/article/20261115/herald/de3f8c6ec76b3ff0432d5e46012c1ae9.html</li>
+    <li>中国基金报《11 月 10 日股票 ETF 合计净流出 10.6 亿元》（宽基单日 -41.12 亿、终结 26 个交易日连续净流入；半导体近 5 日 +132 亿）（2026-11-11）：https://www.chnfund.com/article/AR685a235c-38e5-734e-cbea-3a24dacf631b</li>
+    <li>中国基金报《11 月 12 日股票 ETF 资金净流出超 240 亿元，银行等方向吸金》（全市场 -316.1 亿、宽基 -228.41 亿）（2026-11-13）：https://www.chnfund.com/article/AR2dec6db8-e3b1-a097-c8a5-3a24e54588ac</li>
+    <li>东方财富基金移动端接口 FundMNBasicInformation（ENDNAV 期末净资产、TRACKINDEX 跟踪指数全称；报告期 2026-09-30，非实时规模）：https://fundmobapi.eastmoney.com/ ；本地脚本 <code>node assets/fetch_etf_anchor.js</code>（11-16 12:4x 复跑，12 只锚全部复现；汇金/诚通/国新持有人证据仅存在于定期报告，该接口与东财 F10 均无份额持有人名单）</li>
+    <li>东方财富 数据中心 两融历史（RPTA_RZRQ_LSHJ；RZRQYE 原值单位＝元、/1e8 得亿元，已用 RZJME5D=22.58 亿交叉验证；DIM_DATE 为披露日）：https://datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_RZRQ_LSHJ&amp;columns=ALL&amp;sortColumns=DIM_DATE&amp;sortTypes=-1&amp;pageSize=8&amp;source=WEB&amp;client=WEB</li>
+    <li>东方财富 涨停/跌停/炸板池（<b>date=YYYYMMDD 生效，逐日回取；必须带 <code>sort=fbt%3Aasc</code>，否则返回 rc:102</b>；字段 lbc=连板数、hybk=行业截断 5 字，只统计家数与行业、不点名个股）：https://push2ex.eastmoney.com/getTopicZTPool?ut=7eea3edcaed734bea9cbfc24409ed989&amp;dpt=wz.ztzt&amp;Pageindex=0&amp;pagesize=200&amp;sort=fbt%3Aasc&amp;date=20261113 ；同法 getTopicDTPool、getTopicZBPool</li>
+  </ol></div>
+  <div class="src"><ol start="31">
+    <li>东方财富 板块日K与逐日资金流（<b>09:04 抓取；push2his 11:41—11:52 整段拒连，此为本季唯一记录</b>；daykline fields2 取 f51—f63 升序、只用主力净额 f52 与涨跌 f63）：https://push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?lmt=0&amp;klt=101&amp;secid=90.BK0917&amp;fields1=f1,f2,f3,f7&amp;fields2=f51,f52,f53,f54,f55,f56,f57,f58,f59,f60,f61,f62,f63 ；本地脚本 <code>node assets/fetch_bk_week.js 2026-11-09 2026-11-13 BK…</code> 与 <code>assets/fetch_concept_flows.js</code></li>
+    <li>中国金融期货交易所 会员成交持仓排名（前 20 会员多/空，datatypeid 0=成交量、1=持买、2=持卖，含"(代客)"席位）：http://www.cffex.com.cn/ ；本地脚本 <code>node assets/fetch_cffex_rank.js 2026-11-06 2026-11-13</code>（11-16 复跑逐位复现）</li>
+    <li>新浪财经 期货日K（中金所 IF/IH/IC/IM 2612 合约收盘对现货自算基差；布伦特/COMEX 商品逐日，§01 备注列）：https://finance.sina.com.cn/futures/ ；2612 序列以新浪中金所日K自算并于 11:40 批次复现</li>
+    <li>蛋卷基金 指数估值表（PE/分位/股息率，数据日 11-13；<b>分位窗口＝该数据商历史区间，与中证五年分位不可比；无 000510 与标普红利低波50 条目</b>）：https://danjuanfunds.com/djapi/index_eva/dj</li>
+    <li>中国货币网（当日人民币中间价可取；<b>ShiborHis 记录字段为空、CcprHis 404、CcprHisNew 500，DR007/SHIBOR/上周逐日中间价均不可得</b>；中债收益率官方序列与东财 171.* 交叉）：https://www.chinamoney.com.cn/</li>
+    <li>东方财富 基金逐项数据（逐日净值与持仓代码；<b>净值时间戳为北京时间零点</b>）：https://fund.eastmoney.com/pingzhongdata/539002.js ；https://fund.eastmoney.com/pingzhongdata/019018.js （需 Referer: https://fund.eastmoney.com/ ）；持仓变动的权威口径仍是基金公司定期报告</li>
+    <li>汇金线索（本期 11-09—11-15 复核：无任何新增公告/持有人披露）：新浪财经《中央汇金，最新动向》（2026-01-22，年末 21 只 ETF 1973.51 亿份/7973.22 亿元口径与 1 月份额跌破披露的对照）https://xincai.com/article/nhiecaz5877792 ；财联社《中央汇金 4 月护盘增持或超 2100 亿》（2025 中报"机构 1"验证方法）https://www.cls.cn/detail/2090695 ；雪球估算帖（2026-01-20，四大 300ETF 被净赎回约 317 亿，<b>个人估算，仅作线索</b>）https://xueqiu.com/5519392453/372152829</li>
+    <li>21 世纪经济报道《一场券商策略会，看懂 2027 宏观大势、A 股节奏与配置主线》（中信建投夏凡捷，2026-11-11）：https://www.21jingji.com/article/20261111/herald/7cafc8b50b22060c09198f0b40b8e8f3.html</li>
+    <li>价值线摘要《A 股 2026 年 11 月观点及配置建议：先守后攻，静待花开》（招商证券月报转述，2026-11-02）：https://www.vzkoo.com/read/12109396714400011efb0a94628a.html</li>
+    <li>央广财经转中国证券报《券商 11 月策略：低位修复与业绩确定性成配置主线》（2026-11-04）：https://www.cnr.cn/jrpd/mxdj/20261104/t20261104_527861809.shtml</li>
+    <li>新华社《亚太经合组织第三十三次领导人非正式会议将于 2026 年 11 月 18 日至 19 日在深圳举行》（2025-12-12 官宣）：https://www.news.cn/world/20251212/b1ca5232d1af4b26a5f4f580e51c3af0/c.html ；一带一路官网《2026 年 APEC 工商领导人峰会 11 月 17 日至 18 日深圳举办》：https://www.yidaiyilu.gov.cn/p/0DHSR22B.html</li>
+    <li>上海证券交易所《关于沪港通交易信息披露机制调整相关事项的通知》（2024-07-26 发布、2024-08-19 生效，停止披露北向每日/盘中净买入）：https://www.sse.com.cn/lawandrules/sselawsrules2025/global/hkexsc/c/c_20250613_10781806.shtml</li>
+    <li>黄金叙事：财联社《11 月 16 日现货黄金亚盘冲高回落，上周累跌 4.6%》（伦敦金 11-12 盘中 3852.48 创逾一年新低、11-13 收 3884.25、6 月初以来最大单周跌幅）https://www.cls.cn/detail/2535260 ；经济参考报《创年内新低 国际金价失守 3900 美元后小幅反弹》（11-13）http://jjckb.xinhuanet.com/20261113/fb9a71d058a24c5a9d308e5ea0af89a6/c.html ；搜狐《金价，跌回一年前》（2026 年初高点 5598 美元上方）https://www.sohu.com/a/1101449110_121455647</li>
+    <li>东方财富官方代码查询接口（BK 板块与期货 secid 出处）：https://searchapi.eastmoney.com/api/suggest/get?type=14&amp;token=D43BF722C8E33BDC906FB84D85E326E8&amp;q=半导体 ；本页 §04/§08 使用 BK0917/BK0891/BK0800/BK1128/BK1136/BK1137/BK1134/BK1138/BK1064/BK0896/BK1036 等，<b>均为东财板块口径</b></li>
+    <li>标普道琼斯指数 标普中国A股大盘红利低波50 指数官网页（对抓取返回 <b>403</b>，指数原值无公开日频渠道）：https://www.spglobal.com/spdji/zh/indices/dividends-factors/sp-china-a-share-largecap-low-volatility-high-dividend-50-index/ ；正文数值为 515450 二级收盘代理</li>
+  </ol></div>
+
+  <h3>待核清单（本期未取证，下期继续核实；正文已标 ⚠️）</h3>
+  <div class="src"><ul class="tight">
+    <li><b>DR007/SHIBOR 逐日与上周逐日人民币中间价</b>：中国货币网接口字段为空/404/500，只有当日中间价；DR001 均值 1.30% 为媒体口径旁证。</li>
+    <li><b>两市成交额周合计 8.26 万亿、日均 1.65 万亿</b>：媒体口径，push2his 断连未能自算逐日全量；11-13 单日 16556.68 亿与上交所例行发布可互证。</li>
+    <li><b>11-09/10/11 三日 OMO 净投放额</b>、11 月 LPR 最近报价值、日本央行 12 月会议日期、USTR 178 项豁免延期原文、70 城房价发布具体时点。</li>
+    <li><b>国家队主体证据</b>：汇金/诚通/国新 2026 三季报份额持有人明细未逐只复核；2026-11-09—11-15 未见任何新增公告——<b>禁止由份额外推主体</b>。</li>
+    <li><b>周频真实景气</b>：DRAM/NAND 现货价与台积电月营收可核值仍停在 9 月（10 月值未取到发布页）；CPO/光模块无公开周频景气口径。</li>
+    <li><b>汽车零部件、通用设备、专用设备三个涨停最集中行业的周涨跌与主力净额</b>（push2his 拒连未取），第四条证据（成交额占比/换手分位）同期缺失。</li>
+    <li><b>000510 与标普红利低波50 的 PE/分位</b>：蛋卷连续四期无条目；"标普红利 PE 11.43/分位 99.68%"是<b>另一指数</b>，不得混用。</li>
+    <li><b>英伟达换帅的监管与订单影响评估</b>：本期只有治理事实，无客户订单口径；《巴伦周刊》50bp 概率 13.6% 未取原文。</li>
+  </ul></div>
+
+  <h3>本期公开纠错（上期遗留且本期核实到）</h3>
+  <div class="src"><ul class="tight">
+    <li><b>涨停池 date 参数</b>：前两期规范记"忽略 date、上周逐日只能靠媒体复盘"。本期实测 <code>date=YYYYMMDD</code> 生效（11-09 至 11-13 五日全部取回且行业分布互不相同）；旧结论成因是不带 <code>sort</code> 参数返回 rc:102、以及 <code>qdate</code> 恒为最近交易日的误导。§08 第三条证据由媒体兜底升级为接口直取。</li>
+    <li><b>IC/IM 周度基差</b>：连续两期标 ⚠️，本期改用中金所 2612 合约收盘对现货自算取齐四品种（§03），不再依赖东财连续合约代码。</li>
+    <li><b>基金净值日期口径</b>：09:00 中断批次把 539002 最新净值记为 11-11、周内区间自 11-04 起——pingzhongdata 时间戳为北京时间零点，按 UTC 取整整体错后一天；正确为最新 11-12、11-06→11-12 +10.14%，019018 峰值日由 11-10 更正为 11-11。</li>
+    <li><b>ETF"配置盘买入"表述</b>：上期把份额申购与场内主力净额混写为一个结论；本期同只产品两口径反号（588000 主力 +19.15 亿 vs 份额 -60.42 亿），§02 改为双列并呈。</li>
+    <li><b>上期"红利 ETF 被买"未延续</b>：512890 主力净额上周 +5.30 亿、本周 -0.69 亿，方向翻转，只记录事实不外推。</li>
+    <li><b>上期把 11-10 管制到期列为最大尾部风险</b>：本期中美双方同步延期（§05），风险解除；但市场"利好落地即回吐"，说明该风险溢价早已计入——判断记录为"方向对、定价时点错"。</li>
+  </ul></div>
+
+  <div class="disclaimer">本页由自动化任务生成（每周一 09:00，Asia/Shanghai），仅作信息整理与研究记录，<b>不构成投资建议</b>。数据可能存在延迟或错漏，请以官方披露为准。行情条为浏览器直连公开接口的实时/延迟读数，与正文收盘口径可能不同。含个人持仓信息，已声明不被搜索引擎收录，请勿对外传播链接。</div>
+
+  <footer class="pager">
+    <a href="2026-W45.html">← 上一期 2026-W45</a>
+    <a href="../index.html">返回归档首页</a>
+  </footer>
+</section>
+</div>
+
+<script src="../assets/js/chart.js?v=2026-11-06n"></script>
+<script src="../assets/js/ticker.js?v=2026-11-06n"></script>
+<script>
+window.FW_TICK = [
+  {name:"上证",     em:"1.000001", tc:"sh000001", dec:2, snapshot:{price:3634.35, pct:-0.59}},
+  {name:"深成",     em:"0.399001", tc:"sz399001", dec:2, snapshot:{price:10968.79, pct:-2.05}},
+  {name:"沪深300",  em:"1.000300", tc:"sh000300", dec:2, snapshot:{price:4016.29, pct:-0.68}},
+  {name:"中证A500", em:"1.000510", tc:"sh000510", dec:2, snapshot:{price:4842.51, pct:-1.17}},
+  {name:"科创50",   em:"1.000688", tc:"sh000688", dec:2, snapshot:{price:1279.66, pct:-2.30}},
+  {name:"中证500",  em:"1.000905", tc:"sh000905", dec:2, snapshot:{price:6465.49, pct:-2.10}},
+  {name:"创业板",   em:"0.399006", tc:"sz399006", dec:2, snapshot:{price:2426.08, pct:-3.32}},
+  {name:"红利低波", em:"2.H30269",               dec:2, snapshot:{price:11363.61, pct:1.24}},
+  {name:"标普红利低波50", em:"1.515450",         dec:3, snapshot:{price:1.461, pct:1.32}},
+  {name:"恒生",     em:"100.HSI",    tc:"hkHSI",  dec:2, snapshot:{price:23637.60, pct:-1.55}},
+  {name:"纳指100",  em:"100.NDX100", tc:"usNDX",  dec:2, snapshot:{price:27943.74, pct:-1.22}},
+  {name:"纳指综合", em:"100.NDX",    tc:"usIXIC", dec:2, snapshot:{price:25136.27, pct:-0.91}},
+  {name:"标普500",  em:"100.SPX",    tc:"usINX",  dec:2, snapshot:{price:7561.67, pct:-0.40}},
+  {name:"道指",     em:"100.DJIA",   tc:"usDJI",  dec:2, snapshot:{price:52347.55, pct:0.10}},
+  {name:"布伦特",                               dec:2, snapshot:{price:96.29, pct:-1.66}},
+  {name:"USD/CNH",                              dec:4, snapshot:{price:6.6747, pct:0.01}}
+];
+
+(function () {
+  fwBar(document.getElementById("c-week"), {
+    height: 340, minPer: 48,
+    labels: ["费城半导体","日经225","KOSPI","纳指100","斯托克50","标普500","富时100","科创50","道琼斯","恒生指数","上证指数","沪深300","创业板","中证A500","中证500","中证1000","深证成指","恒生科技","中国金龙"],
+    values: [8.05,6.46,4.56,3.53,3.51,2.51,2.14,2.11,2.07,-0.41,-0.44,-0.94,-1.59,-1.46,-2.00,-2.28,-1.85,-6.50,-5.49]
+  });
+  fwLine(document.getElementById("c-path"), {
+    height: 320, digits: 1, baseline: 100,
+    xLabels: ["11-06 基准","11-09","11-10","11-11","11-12","11-13"],
+    series: [
+      {name:"科创50",   color:"#ef4d4d", values:[100,100.30,100.94,103.77,104.52,102.11]},
+      {name:"沪深300",  color:"#4b8bfd", values:[100,100.05,100.12,100.53,99.74,99.06]},
+      {name:"上证",     color:"#8b98ad", values:[100,100.32,100.40,100.86,100.18,99.59]},
+      {name:"红利低波", color:"#f5a623", values:[100,100.41,100.00,99.41,99.33,100.57]},
+      {name:"中证红利", color:"#3fb37f", values:[100,100.54,100.04,99.96,99.28,99.62]}
+    ]
+  });
+  fwBar(document.getElementById("c-tech"), {
+    height: 330, minPer: 52, digits: 1, axisDigits: 0, suffix: "亿",
+    labels: ["CPO概念","光通信模块","半导体概念","存储芯片","算力概念","液冷服务器","东数西算","人工智能","白酒"],
+    values: [55.07,46.07,12.05,-26.63,-11.02,-14.23,-24.12,-178.41,-6.82]
+  });
+  fwBar(document.getElementById("c-ind"), {
+    height: 330, minPer: 62,
+    labels: ["通信设备","传媒","半导体","银行","元件","消费电子","家用电器","煤炭","软件开发","石油石化","医药商业","电力","有色金属","航运港口","能源金属","贵金属","光伏设备"],
+    values: [3.80,2.44,2.24,2.13,1.43,1.40,1.06,0.44,-1.67,-1.93,-2.10,-2.47,-2.97,-2.98,-5.73,-6.17,-6.67]
+  });
+})();
+</script>
+</body>
+</html>
