@@ -96,7 +96,7 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 | 板块日线（涨跌、成交额） | 同上，`secid=90.BK0917` | 概念与行业都能取，不依赖 push2 |
 | 板块/指数逐日资金流 | `push2his.eastmoney.com/api/qt/stock/fflow/daykline/get?secid=90.BKxxxx` | 字段顺序 f52 主力、f53 小单、f54 中单、f55 大单、f56 超大单；恒等式 主力＝大单＋超大单（`assets/fetch_bk_week.js` 已按此修正并自带校验） |
 | 两融余额与变化 | `datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPTA_RZRQ_LSHJ&columns=ALL&sortColumns=DIM_DATE&sortTypes=-1&pageSize=5&pageNum=1&source=WEB&client=WEB`（带 `Referer: https://data.eastmoney.com/`） | RZYE 融资余额、RZMRE/RZCHE 融资买入与偿还；**以 DIM_DATE 为披露日**，通常滞后 1—2 个交易日 |
-| 涨停/跌停/炸板家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool`（`dpt=wz.ztzt`，需 UA，**`date=YYYYMMDD` 逐日回取**） | 2026-11-16 实测更正：**`date` 参数是生效的**，可逐日取回该日池；周末与节假日返回 `tc:0` 空池，超出可取窗口也是空池（实测 11-06 可取、10-09 起为空，约近 8—10 个交易日）。`qdate` 恒等于最近交易日，**不能用来校验取到哪一天**——旧结论"date 被忽略"就是被它和"11-12 与 11-13 涨停恰好都是 37 家"误导的。字段 `lbc`＝连板数、`zbc`＝当日炸板次数、`hybk`＝行业（截断到 5 字）→ 上周逐日涨跌停家数、封板率、晋级率现在都能自己算，**不必再靠媒体复盘兜底**。只统计家数与行业分布，**不点名个股** |
+| 涨停/跌停/炸板家数与连板高度 | `push2ex.eastmoney.com/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool`（`dpt=wz.ztzt`，需 UA，**`date=YYYYMMDD` 逐日回取，且必须同时带 `sort=fbt%3Aasc`，否则返回 `rc:102、data:null`**） | 2026-11-16 实测更正：**`date` 参数是生效的**，可逐日取回该日池；周末与节假日返回 `tc:0` 空池，超出可取窗口也是空池（实测 11-06 可取、10-09 起为空，约近 8—10 个交易日）。`qdate` 恒等于最近交易日，**不能用来校验取到哪一天**——旧结论"date 被忽略"就是被它和"11-12 与 11-13 涨停恰好都是 37 家"误导的。字段 `lbc`＝连板数、`zbc`＝当日炸板次数、`hybk`＝行业（截断到 5 字）→ 上周逐日涨跌停家数、封板率、晋级率现在都能自己算，**不必再靠媒体复盘兜底**。只统计家数与行业分布，**不点名个股** |
 | 资金面短端利率 | 中国货币网 `chinamoney.com.cn/ags/ms/cm-u-bk-shibor/ShiborHis?lang=cn&startDate=&endDate=` | SHIBOR O/N、1W、3M 可取；DR007 专属端点未跑通（`CurrSysVal` 返回 Path not found），改由央行公告或头部媒体旁证，核不到标 ⚠️ |
 | 基金净值与重仓 | `fund.eastmoney.com/pingzhongdata/019018.js`（带 `Referer: https://fund.eastmoney.com/`） | 含 `Data_netWorthTrend` 逐日净值与 `stockCodes` 持仓；539002、019018 均可用；**持仓变动的权威口径仍是基金公司定期报告** |
 | 美债收益率 | `home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv` | A 级官方；2026-10-30：10Y 4.94、2Y 4.56、30Y 5.31。注意是**美债**，不要与 §09 的中债 10Y 混用 |
@@ -119,7 +119,7 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 | 东财板块行业代码 | 半导体 `BK1036`、传媒 `BK0486`、光伏设备 `BK1031`、教育 `BK0740`、软件开发 `BK0737`、元件 `BK0459`、通信设备 `BK0448`、煤炭 `BK0437`、石油石化 `BK0464`、贵金属 `BK0732`、能源金属 `BK1015`、电池 `BK1033`、银行 `BK1283` | `push2his` 日K 可直接算周涨跌与 `amtWk`（成交额，亿元）；**这是东财 BK 口径，与申万一级不等价，引用时必须写明口径** |
 
 **实测的三个坑（2026-11-16 更正其中第一条，别再按旧结论绕路）**：
-① `push2ex/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool` 的 **`date=YYYYMMDD` 生效**，逐日回取即可拿到上周每天的池（周末/节假日/超出窗口返回 `tc:0` 空池，窗口实测约近 8—10 个交易日）。
+① `push2ex/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool` 的 **`date=YYYYMMDD` 生效**，逐日回取即可拿到上周每天的池（周末/节假日/超出窗口返回 `tc:0` 空池，窗口实测约近 8—10 个交易日）。**2026-11-16 追加实测：请求必须带 `sort=fbt%3Aasc`，缺它即使 date 正确也返回 `rc:102、data:null`**——上次的"忽略 date"误判很可能就源于此。
    旧记录说"忽略 date、周一 09:20 返回 `rc:102、data:null`"——`rc:102` 只在**不传 date 且当日池尚未生成**时出现，传了上一个交易日就正常；当时误判的两个原因是 `qdate` 恒返回最近交易日、以及 11-12 与 11-13 涨停家数恰好都是 37。**上周逐日涨跌停、封板率、晋级率现在都是可核数据，不再标 ⚠️。**
 ② 中国货币网 `ShiborHis` 只返回 `baseCurveCfgList` 记录字段为空、`CcprHis` 404、`CcprHisNew` rep_code 500 → **DR007／SHIBOR／上周逐日中间价均不可得**，只能取当日中间价，其余标 ⚠️；
 ③ `home.treasury.gov` 日度收益率 CSV 在本机 fetch failed（https 与 http 均失败），改用上行 `171.*`。
