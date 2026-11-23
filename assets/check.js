@@ -38,6 +38,30 @@ for (const h of htmls) {
   /* 图表容器与脚本调用一致 */
   const calls = [...src.matchAll(/fw(Bar|Group|Line)\(document\.getElementById\("([^"]+)"\)/g)].map(m => m[2]);
   for (const id of calls) if (!new RegExp('id="' + id + '"').test(src)) bad(h + " 脚本引用了不存在的容器 #" + id);
+
+  /* 站际互链（2026-11-23 用户要求两站可互相跳转）：每页页头都要指向早报 */
+  if (!/financial-morning-post\/">财经早报/.test(src)) bad(h + " 页头缺少指向财经早报的互链（规范 §1 站际互链）");
+
+  /* 归档卡片篇幅与顺序（2026-11-23 用户定稿：政策与预测先写，摘要 ≤200 中文字） */
+  if (h === "index.html") {
+    const CJKc = (x) => (x.match(/[一-龥]/g) || []).length;
+    const cards = [...src.matchAll(/<a class="wk" href="weeks\/(\d{4}-W\d{2})\.html">([\s\S]*?)<\/a>/g)];
+    if (!cards.length) bad("index.html 没有解析到任何 .wk 卡片（结构变了要同步改 check.js）");
+    for (const c of cards) {
+      const title = (c[2].match(/<div class="t">([^<]*)<\/div>/) || [])[1] || "";
+      const desc = (c[2].match(/<div class="d">([\s\S]*?)<\/div>/) || [])[1] || "";
+      const plain = desc.replace(/<[^>]+>/g, "");
+      const dt = CJKc(title), dd = CJKc(plain);
+      if (!title) bad(`归档卡片 ${c[1]} 没有 .t 标题`);
+      else if (dt > 30) bad(`归档卡片 ${c[1]} 标题 ${dt} 中文字 > 30`);
+      if (dd > 200) bad(`归档卡片 ${c[1]} 摘要 ${dd} 中文字 > 200（政策／预测／主线／纠错各一句，别把正文搬进来）`);
+      else if (dd && dd < 60) bad(`归档卡片 ${c[1]} 摘要只有 ${dd} 中文字，四句没写全`);
+      if (plain && !/^\s*政策：/.test(plain)) bad(`归档卡片 ${c[1]} 摘要没有以"政策："开头（用户 2026-11-23 要求政策分析前置）`);
+      if (plain && !/预测：/.test(plain)) bad(`归档卡片 ${c[1]} 摘要缺"预测："一句（本周情景推演要前置展示）`);
+    }
+    if (cards.length) ok(`归档卡片 ${cards.length} 张：政策与预测前置、篇幅合规`);
+  }
+
   /* 快照数据 */
   const tick = src.match(/window\.FW_TICK\s*=\s*(\[[\s\S]*?\]);/);
   if (tick) {
