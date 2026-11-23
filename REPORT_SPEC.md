@@ -122,6 +122,7 @@ NDX 用 `100.NDX`、SPX `100.SPX`、DJIA `100.DJIA`、N225 `100.N225`）与腾�
 ① `push2ex/getTopicZTPool`、`getTopicDTPool`、`getTopicZBPool` 的 **`date=YYYYMMDD` 生效**，逐日回取即可拿到上周每天的池（周末/节假日/超出窗口返回 `tc:0` 空池，窗口实测约近 8—10 个交易日）。**2026-11-16 追加实测：请求必须带 `sort=fbt%3Aasc`，缺它即使 date 正确也返回 `rc:102、data:null`**——上次的"忽略 date"误判很可能就源于此。
    旧记录说"忽略 date、周一 09:20 返回 `rc:102、data:null`"——`rc:102` 只在**不传 date 且当日池尚未生成**时出现，传了上一个交易日就正常；当时误判的两个原因是 `qdate` 恒返回最近交易日、以及 11-12 与 11-13 涨停家数恰好都是 37。**上周逐日涨跌停、封板率、晋级率现在都是可核数据，不再标 ⚠️。**
 ② 中国货币网 `ShiborHis` 只返回 `baseCurveCfgList` 记录字段为空、`CcprHis` 404、`CcprHisNew` rep_code 500 → **DR007／SHIBOR／上周逐日中间价均不可得**，只能取当日中间价，其余标 ⚠️；
+②b **2026-11-23 实测**：`getTopicDTPool` 的 `hybk` 行业字段**只在 `sort=fund%3Aasc` 时随 pool 返回**（用 `fbt:asc` 时 `rc:0`、`tc` 有值但 `pool` 为空）——跌停行业分布要单独特带这个 sort；上期靠新浪 `GlobalFuturesService.getGlobalFuturesDailyKLine` 自算的 IC/IM 基差，本期该端点**实测返回 null 已失效**，IH/IC/IM 基差退回 ⚠️ 固定缺口（IF 基差可用东财 `8.040130` 主力连续收盘自算）；
 ③ `home.treasury.gov` 日度收益率 CSV 在本机 fetch failed（https 与 http 均失败），改用上行 `171.*`。
 
 **两融单位（2026-W44 曾错一个数量级）**：`RPTA_RZRQ_LSHJ` 的 `RZRQYE` 原值单位是**元**，`/1e8` 得**亿元**（11-06 为 22833.53 亿元＝2.28 万亿元）；`/1e7` 会放大 10 倍。写完必须用 `RZJME5D`（近 5 日融资净买入，亿元）交叉验证一次。
